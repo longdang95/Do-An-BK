@@ -1,3 +1,2 @@
-# Idle project
-# idle-project
-kakak
+# Đồ Án Bách Khoa
+##### Đặng Văn Long
