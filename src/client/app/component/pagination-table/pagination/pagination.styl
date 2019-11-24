@@ -1,0 +1,45 @@
+.footer-pg{
+  width 100%;
+  height 50px !important
+  //padding 20px 0;
+  text-align left
+  .sumary{
+    display inline-block
+    font-size: 14px;
+    float left
+  }
+  .pagination{
+    display inline-block
+    height 24px;
+    float right
+    ul{
+      height 24px;
+      list-style-type none
+      outline none
+      padding-inline-start 0 !important
+      li{
+        padding 0 7px;
+        display inline-block
+        color: #525f7f;
+        font-size: 14px;
+        font-weight normal
+        cursor: pointer;
+        //margin-left 5px
+        &:hover{
+          color : #3072ea
+        }
+        &.active{
+          text-decoration underline;
+          text-decoration-color #525f7f;
+          color #525f7f;
+          font-weight 700 !important
+          &:hover{
+            color : #525f7f
+          }
+        }
+      }
+
+    }
+  }
+
+}

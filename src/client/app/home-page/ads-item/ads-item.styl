@@ -1,0 +1,22 @@
+.ads-item{
+  margin-top 30px;
+  .main-container{
+    .images-left, .images-right{
+      flex 0 0 25%;
+
+    }
+    .images-center{
+      flex 0 0 50%;
+    }
+    .banner-image{
+      margin-bottom  30px;
+      img{
+        transition all 0.3s ease-in-out;
+        &:hover{
+          transform scale(1.2);
+          border-radius 20px;
+        }
+      }
+    }
+  }
+}

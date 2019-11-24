@@ -1,0 +1,9 @@
+/node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/.idea
+dist/assets/js/bundle.js
+dist/assets/css/style.css
+dist/uploads
+/build

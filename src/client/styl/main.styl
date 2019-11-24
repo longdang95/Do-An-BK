@@ -1,0 +1,52 @@
+@import "base/color.styl"
+@import "base/fonts.styl"
+@import "base/font-size.styl"
+//@font-face { font-family: poetsen;
+//  src: url('/css-lib/PoetsenOne-Regular.ttf'); }
+.input {
+    height 40px;
+    width 100%;
+    padding 5px 10px;
+    //font-family poetsen !important
+}
+
+.image-light-dark {
+    //width 40px;
+    //margin 4px;
+    &:hover {
+        filter: brightness(110%);
+    }
+    &.hide {
+        opacity: .3;
+        filter: grayscale(30%);
+    }
+}
+
+i, img {
+    cursor pointer
+    &.hide {
+        opacity: .3;
+        filter: grayscale(30%);
+    }
+}
+
+.content-center {
+    text-align center
+}
+
+.flex-row {
+    display flex;
+    flex-direction row ;
+    flex-wrap wrap;
+}
+
+.flex-column {
+    display flex ;
+    flex-direction column;
+}
+
+@media only screen and (max-width: 800px ) {
+    #disqus_thread {
+        width 100%;
+    }
+}

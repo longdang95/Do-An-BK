@@ -1,0 +1,72 @@
+.pagination-table-cover {
+    overflow: auto;
+    table {
+        width 100%;
+        font-family 'Roboto', serif !important
+        margin: 0 0 1.5em !important;
+        //border-collapse: collapse !important;
+        font-size: 1em !important;
+        //border: 1px solid #ccc !important;
+        color: #525f7f !important
+        thead {
+            font-weight 500;
+            font-size 15px;
+            tr {
+                td {
+                    padding 5px 10px;
+                    text-transform uppercase;
+                    //text-align center
+                    //border: 1px solid #ccc !important;
+                    font-weight bolder;
+                }
+            }
+        }
+        tbody {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+            tr {
+                cursor pointer;
+                margin: 0;
+                padding: 0;
+                border: 0;
+                font-size: 100%;
+                font: inherit;
+                vertical-align: baseline;
+                &:hover {
+                    background-color: rgba(0, 0, 0, .075);
+                }
+                td {
+                    border-top: 1px solid #dee2e6 !important;
+                    padding: 10px 5px ;
+
+                    //border: 1px solid #ccc !important;
+                    //font-size: 11pt;
+                    font-family: Helvetica, Arial, sans-serif;
+                    //text-align: center;
+
+                    vertical-align middle
+                    font-size 14px;
+                    //font-weight 500
+                    //padding 5px 15px;
+                    //text-align center
+                    //&:nth-child(2){
+                    //  text-align left !important
+                    //}
+                }
+            }
+        }
+    }
+}
+&.left{
+    text-align left
+}
+&.right{
+    text-align right
+}
+&.mid{
+    text-align center
+}
