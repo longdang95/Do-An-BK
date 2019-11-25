@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import {SearchPanel} from "./search-panel/search-panel";
 import {productApi} from "../../../../api/product/product-api";
 import {formatter} from "../../../commond";
+import {cartApi} from "../../../../api/cart/cart-api";
 
 export class AppHeader extends React.Component {
     constructor(props) {
@@ -167,7 +168,15 @@ export class CartInfoDropdown extends React.Component {
                                                         <img
                                                             width={50}
                                                             src={o.images[0].filePath} alt=""/>
+                                                        <i
+                                                            onClick={()=>{
+                                                                cartApi.clearProduct(cart._id , o._id).then(data =>{
+                                                                    cartState.setState(data)
+                                                                })
+                                                            }}
+                                                            className="fas fa-times"></i>
                                                     </div>
+
                                                 </div>
                                             </div>
                                             <hr/>

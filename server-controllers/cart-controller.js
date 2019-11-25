@@ -131,4 +131,24 @@ module.exports = (app) => {
         }
 
     })
+
+    // xóa sản phẩm ra khỏi giỏ hàng.
+    app.get('/cart/:cartId/clear-product/:productId', async (req, res) =>{
+        let { cartId , productId } = req.params ;
+        let cart = await  checkCart(cartId);
+        let prds =  cart.products.filter(p => p._id != productId);
+        let total_price =calTotalPrice(prds) ;
+        let upsert = {
+            ...cart._doc,
+            products : prds,
+            total_price: total_price
+        }
+        if(cart){
+            CartDao.findOneAndUpdate({_id : cartId } , upsert, {new : true} ,(err, rs) =>{
+                return res.send(rs);
+            } )
+        }else{
+            return res.send({});
+        }
+    })
 }
