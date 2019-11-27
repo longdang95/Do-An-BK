@@ -32,8 +32,8 @@ export class CheckoutPage extends React.Component {
             onlyNumber: true
         },
         {
-            label: 'Mã zip code',
-            key: 'zip_code'
+            label: 'Email',
+            key: 'email'
         },
         // {
         //     label: 'Mã thẻ',
@@ -58,12 +58,13 @@ export class CheckoutPage extends React.Component {
         company: '',
         address: '',
         phone_number: '',
-        zip_code: '',
-        card_number: '',
-        cvv: '',
-        expired: ''
+        email:''
     })
-
+    isNotValid(){
+        const {customer_name , company , address ,phone_number , email} = this.state;
+        let isEmpty = (val) => val === "";
+        return isEmpty(customer_name) || isEmpty(company ) || isEmpty(address) || isEmpty(phone_number) || isEmpty(email) ;
+    }
     render() {
         let cart = cartState.getState();
         console.log(this.state);
@@ -172,6 +173,7 @@ export class CheckoutPage extends React.Component {
                     <div className="main-container row">
                         <div className="col-lg-12">
                             <button
+                                disabled={this.isNotValid()}
                                 className='btn btn-primary'
                                 onClick={() => {
                                     let cart = cartState.getState();

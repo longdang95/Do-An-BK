@@ -29,6 +29,7 @@ export class ShippingSelect extends React.Component {
                     {
                         this.shippingtypes.map((o, i) => (
                             <div
+                                onClick={()=> onChange(o.type)}
                                 key={i}
                                 className={classnames('shipping-select' , type === o.type ?'active':'')}>
                                 <input

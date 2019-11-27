@@ -1,7 +1,7 @@
 const CartDao = require("../dao/cart-dao");
 const ProductDao = require("../dao/product-dao")
  const checkCart = (cartId) => new Promise((res, rej) => {
-    CartDao.findOne({_id: cartId ,  hasPaid : false }, (err, cart) => {
+    CartDao.findOne({_id: cartId }, (err, cart) => {
         if (cart) res(cart);
         res(null)
     })
@@ -49,7 +49,7 @@ module.exports = (app) => {
 
     app.get('/cart-overview/:cartId', async (req, res) => {
         let cart = await checkCart(req.params.cartId)
-        if (cart) {
+        if (cart.active) {
             return res.send({isExist: true , cart})
         } else {
             return  res.send({isExist: false , cart :null})
@@ -100,14 +100,14 @@ module.exports = (app) => {
             }
 
             if(prd){
-                let prds =  isNewCart ? [{...prd, quantity : 1 }]: upSertListProducts( cart.products, prd._doc , quantity ) ;
+                let prds =  isNewCart ? [{...prd._doc, quantity : 1 }]: upSertListProducts( cart.products, prd._doc , quantity ) ;
                 let total_price = calTotalPrice(prds) ;
                 let upcart = {
                     ...cart._doc,
                     products : prds,
                     total_price: total_price
                 }
-                // console.log(upcart)
+                console.log(upcart)
 
                 if(isNewCart){
                     let dr = new CartDao(upcart) ;

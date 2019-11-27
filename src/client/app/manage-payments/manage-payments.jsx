@@ -66,7 +66,18 @@ export class ManagePayments extends React.Component {
                 <div
                     className='cell address'
                 >
-                    {formatter.format(item.cart[0].total_price)}
+                    {formatter.format(item.cart[0].total_price || 0)}
+                </div>,
+            classNames: 'right'
+
+        },
+        {
+            label: 'Trạng thái',
+            renderCell: (item) =>
+                <div
+                    className='cell status-payment'
+                >
+                    {item.status ==2 ? <span className='status-success'>Thành công</span> : item.status ==3 ?<span className='status-failed'>Thất bại</span>  : <span> Đang chờ</span>}
                 </div>,
             classNames: 'right'
 
