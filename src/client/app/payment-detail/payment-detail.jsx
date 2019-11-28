@@ -7,56 +7,70 @@ export class PaymentDetail extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            paymentDetail : null
-
+            cart : null,
+            error :false
         };
 
         this.sessionId = props.match.params.sessionId  ;
         console.log(this.sessionId)
         paymentApi.getPaymentDetail(this.sessionId).then(data =>{
-            console.log(data)
-            this.setState({
-                paymentDetail:  data
-            })
+            if(data.error) {
+                alert(data.message) ;
+                this.setState({error :true })
+            }
+            else{
+                this.setState({
+                    error :false ,
+                    cart:  data.cart
+                })
+            }
+
         })
     }
 
     render() {
-        const {paymentDetail} =this.state ;
+        const {cart , error } =this.state ;
         return(
             <AdminLayout
                 showMenu={false}
                 {...this.props}
             >
                 <div className='payment-detail'>
-                    {paymentDetail &&
+                    {cart &&
                         (
                             <Fragment>
                                 <h1>
-                                    Thanh toán thành công !
+                                    { error ? 'Thanh toán thất bại !' : "Thanh toán thành công !" }
                                 </h1>
+                                <div>
+                                    <h3>Tên khách hàng : {cart.customer_name}</h3>
+                                    <h4>Địa chỉ : {cart.address}</h4>
+                                    <h4>Số điện thoại : {cart.phone_number}</h4>
+                                    <h4>Công ty : {cart.company}</h4>
+                                    <h4>Hình thức thanh toán: {cart.payment_type ==1 ? "MOMO" : "Thẻ Visa"}</h4>
+                                </div>
                                 <div className="main-container row justify-content-center">
                                     <div className="col-lg-4">
                                         <div className="sumary">
                                             <h3>Danh sách sản phẩm</h3>
                                             <h4>
-                                                {paymentDetail.display_items.reduce((o, u) => o + u.quantity, 0)} sản phẩm
+                                                {cart.products.reduce((o, u) => o + u.quantity, 0)} sản phẩm
                                             </h4>
                                             <hr/>
                                             <div className="products">
                                                 {
-                                                    paymentDetail.display_items.map((o, i) => (
+                                                    cart.products.map((o, i) => (
                                                         <div key={i} className='product flex-row'>
-                                                            <img width={60} src={o.custom.images[0]} alt=""/>
+                                                            <img height={60} width={60} src={o.images[0].filePath} alt=""/>
                                                             <div className="product-detail">
                                                                 <h4>
-                                                                    {o.custom.name}
+                                                                    {o.name}
                                                                 </h4>
                                                                 <span>Số lượng: {o.quantity}</span>
                                                             </div>
 
                                                             <div className="price">
-                                                                <h4>{formatter.format(o.quantity * o.amount )}</h4>
+                                                                <h4>{formatter.format(o.quantity * o.price )}</h4>
                                                             </div>
                                                             <hr/>
                                                         </div>
@@ -64,8 +78,8 @@ export class PaymentDetail extends React.Component {
                                                 }
                                             </div>
 
-                                            <h3>
-                                                Total : { formatter.format(paymentDetail.display_items.reduce((o, u) => o + u.quantity* u.amount, 0)) }
+                                            <h3 style={{'text-align':'right'}}>
+                                                Tổng tiền : { formatter.format(cart.total_price || 0) }
                                             </h3>
                                         </div>
                                     </div>

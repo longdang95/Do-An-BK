@@ -17,7 +17,7 @@ const handleCheckoutSession = (session) => {
         if (err) {
             console.log(err)
         } else {
-            console.log('payment has completed with sessionid : ' + session.id);
+            // console.log('payment has completed with sessionid : ' + session.id);
         }
 
     })
@@ -51,6 +51,7 @@ module.exports = (app) => {
 
     runcompleted()
 
+    // lấy danh sách tất cả payments ;
     app.post('/payment', async (req, res) => {
         let p = new PaymentDao({...req.body, cartId: mongoose.Types.ObjectId(req.body.cartId)});
         p.save(err => {
@@ -63,6 +64,8 @@ module.exports = (app) => {
     })
 
 
+    // xử lý thanh toán qua Momo
+
     app.post('/momo/payment', async (req, res) => {
         const {cartId} = req.body;
         const cart = await checkCart(cartId);
@@ -72,10 +75,10 @@ module.exports = (app) => {
             var serectkey = "3X1aU7sxGTTQTeE4eknB9kaymeQIKYSs"
             var orderInfo = "Đồ án thanh toán qua MoMo"
             var amount = "" + cart.total_price;
-            var returnUrl = "http://localhost:5001/checkout"
-            var notifyurl = "https://momo.vn"
-            var orderId = "BY" + new Date().getTime() + 'AX';
-            var requestId = "BY" + (new Date().getTime() + 3434343) + 'AX';
+            var notifyurl = "http://localhost:5001/api/"
+            var orderId = cart._id;
+            var requestId = "DOAN" + new Date().getTime() + 'BK';
+            var returnUrl = "http://localhost:5001/payment-detail/" + requestId;
             var requestType = "captureMoMoWallet"
             var extraData = ""
             var rawSignature = "partnerCode=" + partnerCode + "&accessKey=" + accessKey + "&requestId=" + requestId + "&amount=" + amount + "&orderId=" + orderId + "&orderInfo=" + orderInfo + "&returnUrl=" + returnUrl + "&notifyUrl=" + notifyurl + "&extraData=" + extraData
@@ -106,11 +109,18 @@ module.exports = (app) => {
 
             rp(ops).then(function (parsedBody) {
                 // POST succeeded...
-
-                return res.send(parsedBody)
+                if(parsedBody){
+                    PaymentDao.create({...req.body , status: 2, sessionId : parsedBody.requestId },(err, rs)=>{
+                        console.log(rs);
+                        CartDao.findOneAndUpdate({_id: cart._id}, {active: false}, {new: true}, (err, rm) => {
+                            return res.send(parsedBody)
+                        })
+                    })
+                }else return res.send({})
             })
                 .catch(function (err) {
                     // POST failed...
+                    return res.send({})
                 });
 
         } else {
@@ -119,6 +129,8 @@ module.exports = (app) => {
 
     })
 
+
+    // xử lý thanh toán qua thẻ Visa ( sử dụng dịch vụ của Stripe )
     app.post('/stripe/payment', async (req, res) => {
         const {cartId} = req.body;
         const cart = await checkCart(cartId);
@@ -189,12 +201,27 @@ module.exports = (app) => {
         })
     })
 
+
+    // lấy dữ liệu thanh toán của cart
     app.get('/payment-detail/:sessionId', async (req, res) => {
+        let {sessionId} =  req.params ;
 
-        let session = await stripe.checkout.sessions.retrieve(req.params.sessionId);
-        console.log(session)
+        try{
+            PaymentDao.findOne({sessionId : sessionId} ,(err, pm)=>{
+                if(err) return res.send({});
+                CartDao.findOne({_id : pm.cartId },(err, cart) =>{
+                    console.log(cart);
+                    return res.send({error :false , cart :{...cart._doc , ...pm._doc} })
+                })
+            })
+        }catch(e){
+            return res.send({error :true , message : 'Khong tim thay !'})
+        }
 
-        return res.send(session)
+        // let session = await stripe.checkout.sessions.retrieve(req.params.sessionId);
+        // console.log(session)
+        //
+        // return res.send(session)
     })
 
 

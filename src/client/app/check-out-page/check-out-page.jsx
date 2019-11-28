@@ -53,7 +53,7 @@ export class CheckoutPage extends React.Component {
 
 
     initState = () => ({
-        shippingType: 1,
+        payment_type : 1,
         customer_name: '',
         company: '',
         address: '',
@@ -68,7 +68,7 @@ export class CheckoutPage extends React.Component {
     render() {
         let cart = cartState.getState();
         console.log(this.state);
-        const {shippingType} =this.state;
+        const {payment_type} =this.state;
         return (
             <ManageLayout
                 {...this.props}
@@ -165,7 +165,7 @@ export class CheckoutPage extends React.Component {
                         <div className="col-lg-6">
                             <ShippingSelect
                                 onChange={(type) => this.setState({ shippingType : type  })}
-                                type={shippingType}
+                                type={payment_type}
                             />
                         </div>
                     </div>
@@ -179,18 +179,14 @@ export class CheckoutPage extends React.Component {
                                     let cart = cartState.getState();
                                     let draft = {
                                         ...this.state,
-                                        // card: {
-                                        //     number: this.state.card_number,
-                                        //     cvv: this.state.cvv
-                                        // },
                                         cartId: cart._id
                                     }
-                                    if(shippingType == 1){
+                                    if(payment_type == 1){
                                         paymentTypeApi.momoPayment(draft).then(data =>{
                                             console.log(data);
                                             window.location.href = data.payUrl;
                                         })
-                                    }else if(shippingType == 2){
+                                    }else if(payment_type == 2){
                                         paymentTypeApi.stripePayment(draft ).then(data => {
                                             console.log(data);
                                             var stripe = Stripe('pk_test_we4wQaoEXbcI2aGqGA271f6s00SezYhYRK');
