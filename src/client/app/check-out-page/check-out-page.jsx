@@ -164,7 +164,7 @@ export class CheckoutPage extends React.Component {
                     <div className="main-container row">
                         <div className="col-lg-6">
                             <ShippingSelect
-                                onChange={(type) => this.setState({ shippingType : type  })}
+                                onChange={(type) => this.setState({ payment_type : type  })}
                                 type={payment_type}
                             />
                         </div>
