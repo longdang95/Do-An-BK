@@ -45,7 +45,7 @@ export class Dashboard extends React.Component {
             >
                 <div className='dashboard'>
                     <div className="main-container">
-                        <h2>Trang Dashboard</h2>
+                        <h1>Dashboard</h1>
                     </div>
                     {
                         sparkline && (

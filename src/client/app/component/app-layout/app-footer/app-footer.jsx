@@ -74,7 +74,7 @@ export class AppFooter extends React.Component {
                             <div className="col-lg-3">
                                 <div className="widget">
                                     <h4 className="widget-title">Phương Thức Thanh Toán</h4>
-                                    <img src="assets/img/thanh-toan.png" height="75px" width="250px"/>
+                                    <img src="/assets/img/thanh-toan.png" height="75px" width="250px"/>
                                 </div>
                             </div>
                         </div>
