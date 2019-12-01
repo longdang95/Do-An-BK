@@ -83,7 +83,7 @@ export class AppFooter extends React.Component {
                     <div className="main-container footer-bottom">
                         <p className="footer-copyright">Đồ Án Tốt Nghiệp - Đặng Văn Long © 2019. All Rights Reserved</p>
 
-                        <img src={paymentImage} alt="payment methods" className="footer-payments"/>
+                        <img src="https://cellphones.com.vn/media/wysiwyg/thongbao.png"/>
                     </div>
                 </div>
 

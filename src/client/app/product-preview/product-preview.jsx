@@ -264,7 +264,7 @@ class CartAction extends React.Component {
                 <div className="compare-act">
                     <i
                         onClick={() => this.addToCompareList(product)}
-                        className="fas fa-arrows-alt-h"></i>
+                        className="fas fa-plus-circle"></i>
                 </div>
             </div>
         )
