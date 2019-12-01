@@ -16,19 +16,8 @@ export class MenuPanel extends React.Component {
             label: 'Categories',
             link : '/mobile?brand=all'
         }, {
-            label: 'Pages',
-            // dropdown: () => (
-            //     <div className='dropdown'>
-            //         <div>
-            //             <div>Helo</div>
-            //             <div>Helo</div>
-            //             <div>Helo</div>
-            //             <div>Helo</div>
-            //             <div>Helo</div>
-            //             <div>Helo</div>
-            //         </div>
-            //     </div>
-            // )
+            label: 'Dashboard',
+            link : '/dashboard'
         }, {
             label: 'People'
         }]
