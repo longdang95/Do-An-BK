@@ -72,6 +72,16 @@ export class ManagePayments extends React.Component {
 
         },
         {
+            label : 'Phương thức thanh toán',
+            renderCell :(item) =>
+                <div
+                    className='cell payment-type'
+                >
+                    {item.payment_type == 1 ? "MOMO" :item.payment_type == 2 ? "Thẻ Visa" : "Test"}
+                </div>,
+            classNames :'mid'
+        },
+        {
             label: 'Trạng thái',
             renderCell: (item) =>
                 <div

@@ -5,7 +5,7 @@ import "./flickity.css";
 import {MainRoutes} from "./app/main-routes";
 import {security} from "../security/secuiry-fe";
 import {cartState} from "../security/services/cart-state";
-
+import "antd/dist/antd.css";
 security.init().then(()=>{
     security.checkCart().then(cart => {
         cartState.setState(cart)

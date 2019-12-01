@@ -4,15 +4,13 @@ import {PaginationTable} from "../component/pagination-table/pagination-table";
 import {Select2} from "../common/select/select2";
 import {productApi} from "../../api/product/product-api";
 import {SearchDevice} from "../compare-divices/search-device/search-device";
+import {inventoryApi} from "../../api/inventory/inventory-api";
 
 // Trang thêm sản phẩm vào kho
 export class WareHousing extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            selectedProduct: null,
-            list: null,
-        };
+        this.state = this.initState()
 
         // lấy danh sách sản phẩm từ database
         productApi.getProducts().then((data )=>{
@@ -21,11 +19,34 @@ export class WareHousing extends React.Component {
             })
         })
     }
-
+    initState(){
+        return(
+            {
+                selectedProduct: null,
+                error : false ,
+                quantity_in :'',
+                price_in : '',
+                message : ""
+            }
+        )
+    }
     // xử lý select sản phẩm
     handleSelect(sel){
         this.setState({
             selectedProduct: sel
+        })
+    }
+
+    handleSubmit(){
+        const {quantity_in,  price_in , selectedProduct } =this.state ;
+        let draft ={
+            quantity_in ,
+            price_in ,
+            productId : selectedProduct? selectedProduct._id : null  ,
+        }
+        inventoryApi.submit(draft).then(({error  , message})=>{
+            alert(message);
+            this.setState(this.initState())
         })
     }
     render() {
@@ -75,8 +96,8 @@ export class WareHousing extends React.Component {
                                         type={'number'}
                                         min={0}
                                         className="form-control"
-                                        value={this.state.price}
-                                        onChange={(e) => this.setState({price: e.target.value})}
+                                        value={this.state.price_in}
+                                        onChange={(e) => this.setState({price_in: e.target.value})}
                                         placeholder='Giá mua'/>
                                 </div>
 
@@ -86,12 +107,14 @@ export class WareHousing extends React.Component {
                                         type={'number'}
                                         min={0}
                                         className="form-control"
-                                        value={this.state.quantity}
-                                        onChange={(e) => this.setState({quantity: e.target.value})}
+                                        value={this.state.quantity_in}
+                                        onChange={(e) => this.setState({quantity_in: e.target.value})}
                                         placeholder='Số lượng'/>
                                 </div>
                                 <div className="col-lg-3">
-                                    <button className='btn add-quantity btn-primary'>
+                                    <button
+                                        onClick={()=> this.handleSubmit()}
+                                        className='btn add-quantity btn-primary'>
                                         Thêm vào kho
                                     </button>
                                 </div>
