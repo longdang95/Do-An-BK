@@ -4,6 +4,7 @@ import {paymentApi} from "../../api/payment/payment-api";
 import {PaginationTable} from "../component/pagination-table/pagination-table";
 import moment from 'moment'
 import {formatter} from "../commond";
+import {Tag} from "antd";
 
 export class ManagePayments extends React.Component {
     constructor(props) {
@@ -87,7 +88,7 @@ export class ManagePayments extends React.Component {
                 <div
                     className='cell status-payment'
                 >
-                    {item.status ==2 ? <span className='status-success'>Thành công</span> : item.status ==3 ?<span className='status-failed'>Thất bại</span>  : <span> Đang chờ</span>}
+                    {item.status ==2 ? <Tag color="green">Thành công</Tag> : item ==3 ? <Tag color='red'>Thất bại</Tag>  : <Tag color='purple'> Đang chờ</Tag> }
                 </div>,
             classNames: 'right'
 

@@ -73,10 +73,10 @@ export class MainRoutes extends BaseComponent {
                         <Route path="/compare" component={CompareDevices}/>
                         <Route path="/mobile" component={BrandList}/>
                         <Route path="/checkout" component={haveCart(CheckoutPage)}/>
-                        <Route path="/manage/add-product" exact component={authenRoute(AddProductPage)}/>
-                        <Route path="/manage/trials" exact component={authenRoute(ManageTrials)}/>
-                        <Route path="/manage/warehousing" exact component={authenRoute(WareHousing)}/>
-                        <Route path="/manage/payments" exact component={authenRoute(ManagePayments)}/>
+                        <Route path="/add-product" exact component={authenRoute(AddProductPage)}/>
+                        <Route path="/trials" exact component={authenRoute(ManageTrials)}/>
+                        <Route path="/warehousing" exact component={authenRoute(WareHousing)}/>
+                        <Route path="/payments" exact component={authenRoute(ManagePayments)}/>
                         <Route path="/dashboard" exact component={authenRoute(Dashboard)}/>
                         <Route path="/payment-detail/:sessionId" exact component={PaymentDetail} />
                         <Route path="/preview/:slug" exact component={ProductPreview}/>
