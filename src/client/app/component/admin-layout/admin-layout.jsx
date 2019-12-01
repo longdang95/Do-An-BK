@@ -12,20 +12,6 @@ export class AdminLayout extends React.Component {
 
     render() {
         const {showMenu =true } =this.props ;
-        // let menuItems = [{
-        //     label: 'Thêm sản phẩm mới',
-        //     link : '/add-product'
-        // }, {
-        //     label: 'Quản lý danh sách dùng thử',
-        //     link :'/trials'
-        // },{
-        //     label : 'Quản lý hóa đơn',
-        //     link : '/payments'
-        // },{
-        //     label : 'Nhập Kho',
-        //     link : '/warehousing'
-        // }
-        // ]
         return(
             <div className='admin-layout'>
                 <LeftSideMenuBar />
@@ -39,23 +25,6 @@ export class AdminLayout extends React.Component {
                         </Link>
                     </div>
                 </div>
-                {/*{*/}
-                {/*    showMenu && (*/}
-                {/*        <div className='menu-controler main-container'>*/}
-                {/*            <div className="header-left flex-row">*/}
-                {/*                {*/}
-                {/*                    menuItems.map((o, i) => (*/}
-                {/*                        <Link key={i}  className='none-underline' to={o.link || '#'}>*/}
-                {/*                            <div className='menu-item'>*/}
-                {/*                                {o.label}*/}
-                {/*                            </div>*/}
-                {/*                        </Link>*/}
-                {/*                    ))*/}
-                {/*                }*/}
-                {/*            </div>*/}
-                {/*        </div>*/}
-                {/*    )*/}
-                {/*}*/}
 
                 <div className="main-container main-center">
                     {this.props.children}

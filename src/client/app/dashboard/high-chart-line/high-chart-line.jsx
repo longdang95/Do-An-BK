@@ -7,8 +7,8 @@ export class HighChartLine extends React.Component{
         this.state={
         };
     };
-    componentDidMount(){
-        const {datas=[] ,setNames=[],coinId=null} =this.props ;
+    componentWillReceiveProps(nextProps){
+        const {datas=[] ,setNames=[],id=null} =this.props ;
         var seriesOptions = [],
             seriesCounter = 0,
             names = setNames;

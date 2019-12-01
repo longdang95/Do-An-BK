@@ -9,6 +9,8 @@ import {InventoryInfo} from "./inventory-info/inventory-info";
 import {PaymentInfo} from "./payment-info/payment-info";
 import {inventoryApi} from "../../api/inventory/inventory-api";
 import {paymentApi} from "../../api/payment/payment-api";
+import {SearchDevice} from "../compare-divices/search-device/search-device";
+import {productApi} from "../../api/product/product-api";
 
 export class Dashboard extends React.Component {
     constructor(props) {
@@ -16,29 +18,49 @@ export class Dashboard extends React.Component {
         this.state = {
             sparkline: null,
             inventories : [],
-            bills :[]
+            bills :[],
+            listProducts : null,
+            value :'',
+            selectedProduct: null
         };
 
-        chartApi.getSumary().then(data => {
-            this.setState({sparkline: data})
+        // lấy danh sách sản phẩm
+        productApi.getProducts().then((data )=>{
+            this.setState({
+                listProducts : data.list
+            })
         })
 
+        // lấy data chart
+        this.getDataChart();
+
+        // lấy thông tin kho nhập mới nhất
         inventoryApi.getInventories().then(data =>  this.setState({inventories : data }))
+
+        // lấy thông tin thanh toán mới nhất
         paymentApi.getPayments().then(data => {
             this.setState({bills: data})
         })
     }
 
+
+
+    getDataChart(){
+        chartApi.getSumary().then(data => {
+            this.setState({sparkline: data})
+        })
+    }
+
+    // xử lý select product cho chart
+    handleSelect(sel){
+        this.setState({
+            selectedProduct: sel
+        })
+        this.getDataChart();
+    }
     render() {
-        const {sparkline , inventories , bills } = this.state;
-        const chartData = [];
-        for (let i = 0; i < 20; i += 1) {
-            chartData.push({
-                x: new Date().getTime() + 1000 * 60 * 30 * i,
-                y1: Math.floor(Math.random() * 100) + 1000,
-                y2: Math.floor(Math.random() * 100) + 10,
-            });
-        }
+        const {sparkline , inventories , bills ,listProducts,selectedProduct,value } = this.state;
+
         return (
             <AdminLayout
                 {...this.props}
@@ -99,12 +121,52 @@ export class Dashboard extends React.Component {
 
 
                                 <div style={{paddingTop : '50px'}} className='main-container'>
+                                    <div className="col-lg-12">
+                                        <div className="row">
+                                            <div className="select-product col-lg-3">
+                                                <h4>Chọn sản phẩm:</h4>
+                                                {
+                                                    listProducts && (
+                                                        // component search và select sản phẩm
+                                                        <SearchDevice
+                                                            value={ value}
+                                                            onChange={(val) => this.setState({ value : val})}
+                                                            list={listProducts|| []}
+                                                            selectItem={ selectedProduct }
+                                                            onSelect={(sel) => this.handleSelect(sel)}
+                                                            renderResult={(item)=> (
+                                                                <div onClick={()=> this.handleSelect(item)} className='content-rs flex-row'>
+                                                                    <span className='device-name'>{item.name}</span>
+                                                                    <img className='device-image' src={item.images[0].filePath} height={40} alt=""/>
+                                                                </div>
+                                                            )}
+                                                            renderSelected={(item) => (
+                                                                <div
+                                                                    className='selected-item'>
 
-                                    <HighChartLine
-                                        coinId={'price_in'}
-                                        datas={[sparkline.inventoryData, sparkline.pmData]}
-                                        setNames={['Giá nhập', 'Giá bán']}
-                                    />
+                                                                </div>
+                                                            )}
+                                                        />
+                                                    )
+                                                }
+                                            </div>
+                                        </div>
+
+                                        <div className="row">
+                                            {
+                                                selectedProduct && (
+                                                    <HighChartLine
+                                                        id={'price_in'}
+                                                        datas={[sparkline.inventoryData, sparkline.pmData]}
+                                                        setNames={['Giá nhập', 'Giá bán']}
+                                                    />
+                                                )
+                                            }
+
+                                        </div>
+                                    </div>
+
+
                                 </div>
                             </Fragment>
                         )
@@ -112,11 +174,13 @@ export class Dashboard extends React.Component {
 
                     <div className='payment-infomation row main-container'>
                         <div className="col-lg-4">
+                            {/*component thông tin kho nhập*/}
                             <InventoryInfo
                                 inventories={inventories}
                             />
                         </div>
                         <div className="col-lg-8">
+                            {/*component thông tin thanh toán*/}
                             <PaymentInfo
                                 payments={bills}
                             />
