@@ -10,9 +10,10 @@ export class MenuPanel extends React.Component {
         let menuItems = [{
             label: 'Home'
         }, {
-            label: 'Categories'
+            label: 'Log In',
+            link : '/login'
         }, {
-            label: 'Products',
+            label: 'Categories',
             link : '/mobile?brand=all'
         }, {
             label: 'Pages',
