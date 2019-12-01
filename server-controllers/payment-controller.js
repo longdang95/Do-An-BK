@@ -51,7 +51,7 @@ module.exports = (app) => {
 
     runcompleted()
 
-    // lấy danh sách tất cả payments ;
+    // tạo tất cả payments ;
     app.post('/payment', async (req, res) => {
         let p = new PaymentDao({...req.body, cartId: mongoose.Types.ObjectId(req.body.cartId)});
         p.save(err => {
@@ -182,6 +182,8 @@ module.exports = (app) => {
         }
 
     })
+
+    // lay danh sach payments
     app.get('/payments', async (req, res) => {
         PaymentDao.aggregate(
             [
@@ -196,7 +198,7 @@ module.exports = (app) => {
         ).exec((err, arr) => {
 
             if (err) throw err;
-            return res.send(arr.reverse())
+            return res.send(arr.reverse().map(p => ( p.status == 0 || p.status ==1  ) && (new Date().getTime() - new Date(p.created).getTime()) > 24*60*60*1000 ? ({...p, status : 3}) : p   ))
 
         })
     })

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import {Avatar, List} from "antd";
+import {Avatar, List, Tag} from "antd";
 import moment from 'moment';
 export class InventoryInfo extends React.Component {
     constructor(props) {
@@ -29,7 +29,9 @@ export class InventoryInfo extends React.Component {
                                 style={{'marginLeft' :'20px' ,'fontWeight':'600'}}
                                 className='inven-left flex-column'>
                                 <span >Sản phẩm: {item.product_name}</span>
-                                <span >Số lượng: {item.quantity_in}</span>
+                                <div>
+                                    <Tag color='green'>Số lượng: {item.quantity_in}</Tag>
+                                </div>
                             </div>
                             <div className='time'>
                                 {moment(new Date(item.created)).format("DD/MM/YYYY, HH:mm a")}

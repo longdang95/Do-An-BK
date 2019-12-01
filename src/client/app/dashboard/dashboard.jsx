@@ -31,6 +31,14 @@ export class Dashboard extends React.Component {
 
     render() {
         const {sparkline , inventories , bills } = this.state;
+        const chartData = [];
+        for (let i = 0; i < 20; i += 1) {
+            chartData.push({
+                x: new Date().getTime() + 1000 * 60 * 30 * i,
+                y1: Math.floor(Math.random() * 100) + 1000,
+                y2: Math.floor(Math.random() * 100) + 10,
+            });
+        }
         return (
             <AdminLayout
                 {...this.props}
@@ -42,62 +50,61 @@ export class Dashboard extends React.Component {
                     {
                         sparkline && (
                             <Fragment>
-                                <div className="row main-container justify-content-around">
-                                    <div className="head-card col-lg-4">
+                                <div className="main-container sum-header">
+                                    <div className="head-card">
                                         <div className="sum-cover">
-                                            <h4>Máy bán trong tháng</h4>
                                             <div className='row sum-content no-margin'>
-                                                <div className="col-lg-5">
-                                                    <h4>3000</h4>
-                                                    <h5>3.3 %</h5>
-                                                </div>
+
                                                 <div className="col-lg-7">
+                                                    <h4>Máy bán trong tháng</h4>
+                                                    <h5 >3000</h5>
+                                                    <h5 style={{color : 'green'}} >3.3 %</h5>
+                                                </div>
+                                                <div className="col-lg-5">
                                                     <SmallLineChart data={sparkline.inventoryData.map(o => (o[1]))}/>
                                                 </div>
                                             </div>
                                         </div>
 
                                     </div>
-                                    <div className="head-card week col-lg-4">
+                                    <div className="head-card week">
                                         <div className="sum-cover sum-content">
-                                            <h4>Máy bán trong tuần</h4>
                                             <div className='row no-margin'>
-                                                <div className="col-lg-5">
-                                                    <h4>3000</h4>
-                                                    <h5>3.3 %</h5>
-                                                </div>
                                                 <div className="col-lg-7">
+                                                    <h4>Máy bán trong tuần</h4>
+                                                    <h5>3000</h5>
+                                                    <h5 style={{color : 'green'}} >3.3 %</h5>
+                                                </div>
+                                                <div className="col-lg-5">
                                                     <SmallLineChart data={sparkline.pmData.map(o => (o[1]))}/>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="head-card col-lg-4">
+                                    <div className="head-card">
                                         <div className="sum-cover">
-                                            <h4>So với tháng trước</h4>
                                             <div className='row sum-content no-margin'>
-                                                <div className="col-lg-5">
-                                                    <h4>3000</h4>
-                                                    <h5>3.3 %</h5>
-                                                </div>
                                                 <div className="col-lg-7">
+                                                    <h4>So với tháng trước</h4>
+                                                    <h5>3000</h5>
+                                                    <h5 style={{color : 'green'}}>3.3 %</h5>
+                                                </div>
+                                                <div className="col-lg-5">
                                                     <SmallLineChart data={sparkline.inventoryData.map(o => (o[1]))}/>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className='main-container'>
-                                    <Button type="primary">Primary</Button>
-                                </div>
-                                <div className='main-container'>
+
+
+                                <div style={{paddingTop : '50px'}} className='main-container'>
 
                                     <HighChartLine
                                         coinId={'price_in'}
                                         datas={[sparkline.inventoryData, sparkline.pmData]}
                                         setNames={['Giá nhập', 'Giá bán']}
                                     />
-
                                 </div>
                             </Fragment>
                         )

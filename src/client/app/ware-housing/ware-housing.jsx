@@ -106,6 +106,7 @@ export class WareHousing extends React.Component {
                                     <input
                                         type={'number'}
                                         min={0}
+                                        pattern="[0-9]*" data-politespace data-grouplength="3" data-delimiter="," data-reverse
                                         className="form-control"
                                         value={this.state.quantity_in}
                                         onChange={(e) => this.setState({quantity_in: e.target.value})}

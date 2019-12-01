@@ -1,5 +1,5 @@
 import React from 'react';
-import {Table} from "antd";
+import {Table, Tag} from "antd";
 import moment from "moment";
 import {formatter} from "../../commond";
 
@@ -7,9 +7,6 @@ const columns = [
     {
         title: 'Tên khách hàng',
         dataIndex: 'customer_name',
-        sorter: true,
-        // width: '20%',
-        sortDirections: ['descend', 'ascend'],
     },
     {
         title: 'Địa chỉ',
@@ -24,7 +21,7 @@ const columns = [
     {
         title: 'Tgian',
         dataIndex: 'created',
-        render:(item) => moment(item.created).format("DD-MM-YYYY HH:mm a")
+        render:(item) => moment(item).format("DD-MM-YYYY HH:mm a")
     },
     {
         title :'Tổng tiền',
@@ -40,7 +37,7 @@ const columns = [
     {
         title : 'Trạng thái',
         dataIndex :'status',
-        render : (item) => item ==2 ? <span className='status-success'>Thành công</span> : item ==3 ?<span className='status-failed'>Thất bại</span>  : <span> Đang chờ</span>
+        render : (item) => item ==2 ? <Tag color="green">Thành công</Tag> : item ==3 ? <Tag color='red'>Thất bại</Tag>  : <Tag color='purple'> Đang chờ</Tag>
     }
 ];
 
@@ -50,8 +47,8 @@ export class PaymentInfo extends React.Component {
         super(props);
         this.state = {
             pagination: {
-                current :1,
-                total:200
+                current : 1,
+                total: props.payments.length
             },
         };
     }
@@ -60,18 +57,18 @@ export class PaymentInfo extends React.Component {
     }
 
     handleTableChange = (pagination, filters, sorter) => {
-        // const pager = { ...this.state.pagination };
-        // pager.current = pagination.current;
-        // this.setState({
-        //     pagination: pager,
-        // });
-        // this.fetch({
-        //     results: pagination.pageSize,
-        //     page: pagination.current,
-        //     sortField: sorter.field,
-        //     sortOrder: sorter.order,
-        //     ...filters,
-        // });
+        const pager = { ...this.state.pagination };
+        pager.current = pagination.current;
+        this.setState({
+            pagination: pager,
+        });
+        this.fetch({
+            results: pagination.pageSize,
+            page: pagination.current,
+            sortField: sorter.field,
+            sortOrder: sorter.order,
+            ...filters,
+        });
     };
 
 
