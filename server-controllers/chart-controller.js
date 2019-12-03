@@ -46,7 +46,14 @@ module.exports =(app )=>{
             inventoryData.push([time , getRandomNumber(50 , 60)*100000 ]); // lấy giá trị giá ngẫu nhiên từ 5 triệu đến 6 triệu
             pmData.push([time , getRandomNumber(60, 75)*100000]); // lấy giá trị ngẫu nhiên giía từ 6 triệu đến 7 triệu rưỡi
         }
-        return  res.send({inventoryData , pmData})
+
+        let pm  = await PaymentDao.find({status : 2 }) ;
+         pmData = [] ;
+        for( let p of pm ){
+            let cart = await CartDao.findOne({_id  :  p.cartId } ) ;
+            pmData.push([new Date(cart.created).getTime() ,  cart.total_price ])
+        }
+        return  res.send({inventoryData , pmData })
     })
 
 }

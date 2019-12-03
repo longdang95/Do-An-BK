@@ -14,6 +14,7 @@ import {TrialModal} from "../trial-register/trial-modal/trial-modal";
 import {trialRegisterApi} from "../../api/trial-register/trial-register";
 import {cartState} from "../../../security/services/cart-state";
 import {cartApi} from "../../api/cart/cart-api";
+import {viewApi} from "../../api/view/view-api";
 
 export class ProductPreview extends React.Component {
     constructor(props) {
@@ -22,12 +23,16 @@ export class ProductPreview extends React.Component {
             product: null,
             previewIndex: 0,
             samePrice: null,
-            show360: false
+            show360: false ,
+            count : 0
         };
 
         productApi.getProductBySlug(props.match.params.slug).then(data => {
             this.setState({
                 product: data.product
+            })
+            viewApi.getView(data.product._id ).then(data =>{
+                this.setState({ view : data.view  })
             })
         })
 
@@ -112,6 +117,10 @@ export class ProductPreview extends React.Component {
                                 <div className="col-lg-4 preview-mid">
                                     <h3 className="product-name">{product.name}</h3>
                                     <div className="price-box">{formatter.format(product.price)}</div>
+                                    <div className="view-counting">
+                                        <i className="fas fa-eye"></i>
+                                        <span>Đã xem: {this.state.view } lần</span>
+                                    </div>
                                     <div className="product-des">
                                         {/*{product.description}*/}
                                     </div>

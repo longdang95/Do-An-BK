@@ -39,6 +39,7 @@ require("../server-controllers/trial-register-controllers")(router)
 require("../server-controllers/payment-controller")(router)
 require("../server-controllers/chart-controller")(router)
 require("../server-controllers/inventory-controller")(router)
+require("../server-controllers/view-controller")(router)
 app.get("*", (req, res, next) => {
     res.sendFile(__dirname + "/index.html");
 });
