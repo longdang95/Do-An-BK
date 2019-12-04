@@ -5,6 +5,7 @@ import {Select2} from "../common/select/select2";
 import {cartState} from "../../../security/services/cart-state";
 import {ShippingSelect} from "./shipping-select/shipping-select";
 import {paymentTypeApi} from "../../api/momo/momo-api";
+import {Button} from "antd";
 
 export class CheckoutPage extends React.Component {
     constructor(props) {
@@ -18,7 +19,7 @@ export class CheckoutPage extends React.Component {
             key: 'customer_name'
         },
         {
-            label: 'Công ty',
+            label: 'Công ty/Tòa nhà (Nếu có)',
             key: 'company',
         },
         {
@@ -95,7 +96,8 @@ export class CheckoutPage extends React.Component {
                                                                 className="form-control description"
                                                                 value={this.state[o.key]}
                                                                 onChange={(e) => this.setState({[o.key]: e.target.value})}
-                                                                placeholder={o.label}/>
+                                                                placeholder={o.label}
+                                                            />
                                                         ) :
                                                         o.type === 'select' ? (
                                                             <Select2
@@ -131,9 +133,9 @@ export class CheckoutPage extends React.Component {
 
                         <div className="col-lg-4">
                             <div className="sumary">
-                                <h3>Danh sách sản phẩm</h3>
-                                <h4>
-                                    {cart && cart.products.reduce((o, u) => o + u.quantity, 0)} sản phẩm trong giỏ hàng
+                                <h3>Đơn Hàng</h3>
+                                <h4 className= "gio-hang-checkout">
+                                    {cart && cart.products.reduce((o, u) => o + u.quantity, 0)} sản phẩm
                                 </h4>
                                 <hr/>
                                 <div className="products">
@@ -172,9 +174,11 @@ export class CheckoutPage extends React.Component {
 
                     <div className="main-container row">
                         <div className="col-lg-12">
-                            <button
+                            <Button
                                 disabled={this.isNotValid()}
-                                className='btn btn-primary'
+                                type="primary"
+                                size="large"
+
                                 onClick={() => {
                                     let cart = cartState.getState();
                                     let draft = {
@@ -199,8 +203,8 @@ export class CheckoutPage extends React.Component {
                                     }
                                 }}
                             >
-                                Hoàn Thành
-                            </button>
+                                Thanh Toán
+                            </Button>
                         </div>
 
                     </div>
