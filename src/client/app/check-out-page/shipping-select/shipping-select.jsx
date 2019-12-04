@@ -25,6 +25,7 @@ export class ShippingSelect extends React.Component {
         const {type , onChange } = this.props;
         return (
             <div className='shipping-select'>
+                <h4>Hình Thức Thanh Toán</h4>
                 <div className='shipping-controller flex-column'>
                     {
                         this.shippingtypes.map((o, i) => (

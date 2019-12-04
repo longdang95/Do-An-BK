@@ -46,7 +46,7 @@ export class PaymentDetail extends React.Component {
                                     <h3>Tên khách hàng : {cart.customer_name}</h3>
                                     <h4>Địa chỉ : {cart.address}</h4>
                                     <h4>Số điện thoại : {cart.phone_number}</h4>
-                                    <h4>Công ty : {cart.company}</h4>
+                                    <h4>Công ty / Tòa Nhà (Nếu có) : {cart.company}</h4>
                                     <h4>Hình thức thanh toán: {cart.payment_type ==1 ? "MOMO" : "Thẻ Visa"}</h4>
                                 </div>
                                 <div className="main-container row justify-content-center">
