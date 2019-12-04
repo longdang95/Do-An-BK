@@ -6,5 +6,6 @@ export const productApi = {
     getProducts : () => api.get("/api/get-products"),
     getProductBySlug : (slug) => api.get(`/api/get-product/${slug}`),
     getSamePrice  : (slug)  => api.get(`/api/get-same-price/${slug}`),
-    getFilterProducts: (filter) => api.get(`/api/get-filter-product?${covertToQueryString(filter)}`)
+    getFilterProducts: (filter) => api.get(`/api/get-filter-product?${covertToQueryString(filter)}`),
+    deleteProduct : (id) => api.delete(`/api/product/${id}`)
 };

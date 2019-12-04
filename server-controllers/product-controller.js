@@ -38,6 +38,19 @@ module.exports = (app) => {
         })
     })
 
+    app.delete('/product/:id', async(req, res) =>{
+        try{
+            ProductDao.remove({_id : req.params.id },(err, rs) =>{
+                return res.send({error :false , message : 'Xóa thành công !'});
+            })
+        }catch (e) {
+
+            console.log(e)
+
+            return res.send({error :true , message :e.message})
+        }
+    })
+
     app.get('/get-product/:slug', async (req, res) => {
         try {
             let item = await findOneBySlug(req.params.slug);
