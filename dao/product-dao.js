@@ -29,6 +29,7 @@ module.exports= mongoose.model("ProductDao",{
     nfc : String,
     sensor : String,
     battery  : String,
+    status : {type : Boolean , default : true} ,
     created: {type: Date, default: Date.now},
     slug: { type: String, slug: "name", slug_padding_size: 2,  unique: true }
 },"product")

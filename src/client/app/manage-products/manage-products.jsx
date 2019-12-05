@@ -26,14 +26,16 @@ export class ManageProducts  extends React.Component {
         })
     }
 
-    handleDelete=(item)=>{
+    handleActive=(item)=>{
         this.setState({loading :true })
         let _self  = this;
 
-        if(confirm(`Bạn muốn xóa sản phẩm "${item.name}" ?`)){
-            productApi.deleteProduct(item._id ).then((error , message ) =>{
+        if(confirm(`Bạn muốn tạm dừng bán sản phẩm "${item.name}" ?`)){
+            productApi.updateStatus(item._id  , !item.status ).then(({error , message , status } ) =>{
                 alert(message);
-                this.setState({loading :false  , products : this.state.products.filter(o => o._id !== item._id ) })
+                if(!error){
+                    this.setState({loading :false  , products : this.state.products.map(o => o._id == item._id ? ({...o , status : status  }) : (o) ) })
+                }
             })
         }else{
             this.setState({loading :false })
@@ -74,17 +76,21 @@ export class ManageProducts  extends React.Component {
             {
                 title: 'Giá',
                 dataIndex: 'price',
+                align:'right',
                 // filters: [{ text: 'Male', value: 'male' }, { text: 'Female', value: 'female' }],
                 // width: '20%',
                 render :(item) => formatter.format(item)
             },
             {
                 title : 'Ram',
+                align:'right',
+
                 dataIndex :'ram'
             },
 
             {
                 title : 'CPU',
+                align:'right',
                 dataIndex : 'cpu'
             }
             ,
@@ -93,12 +99,18 @@ export class ManageProducts  extends React.Component {
                 dataIndex :'cpu_name'
             },
             {
-                title : 'Act',
+                title : 'Hành động',
+                align:'right',
                 dataIndex :'',
-                render: (item) => <div>
-                    <Button
-                        onClick={()=>this.handleDelete(item)} type="danger" shape="round" >Xóa</Button>
-                </div>
+                render: (item) => {
+                    let isActive = item.status ;
+                    return (
+                        <div>
+                            <Button
+                                onClick={()=>this.handleActive(item)} size='normal' type={isActive ? 'danger' :'primary'} shape="round" >{isActive ? "Tạm dừng bán" :"Bỏ tạm dừng"}</Button>
+                        </div>
+                    )
+                }
             }
 
 

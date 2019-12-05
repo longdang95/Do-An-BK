@@ -17,7 +17,7 @@ const findSamePrice = (gT, lT) => new Promise((res, rej) => {
     })
 })
 module.exports = (app) => {
-
+    // Thêm mới sản phẩm
     app.post('/add-product', (req, res) => {
         console.log(req.body)
         let p = new ProductDao(req.body)
@@ -30,6 +30,8 @@ module.exports = (app) => {
         } )
     })
 
+
+    // lấy danh sách tất cả sản phẩm từ mới nhất đến cũ nhất
     app.get('/get-products', (req, res) => {
         ProductDao.find({}, (err, prds) => {
 
@@ -38,6 +40,8 @@ module.exports = (app) => {
         })
     })
 
+
+    // lấy sản phẩm theo id
     app.delete('/product/:id', async(req, res) =>{
         try{
             ProductDao.remove({_id : req.params.id },(err, rs) =>{
@@ -51,6 +55,8 @@ module.exports = (app) => {
         }
     })
 
+
+    // lấy sản phẩm theo slug
     app.get('/get-product/:slug', async (req, res) => {
         try {
             let item = await findOneBySlug(req.params.slug);
@@ -62,7 +68,7 @@ module.exports = (app) => {
 
     })
 
-
+    // lấy sản phẩm đồng giá trên dưới 2 triệu
     app.get('/get-same-price/:slug', async (req, res) => {
         let range = 2000000;
         try {
@@ -80,6 +86,8 @@ module.exports = (app) => {
         }
     })
 
+
+    // lấy danh sách sản phẩm qua filter
     app.get('/get-filter-product', async (req, res) => {
         let {brand, ram, sim = null, from = null, to = null} = req.query;
         let price = isNull(from) ? isNull(to) ? {$gte: from, $lte: to} : {$gte: from} : {$exists: true};
@@ -93,4 +101,21 @@ module.exports = (app) => {
                 return res.send(prds)
             })
     })
+
+
+    // update status sản phẩm tạm dừng, tiếp tục bán
+    app.get('/product/:id/status/:isActive' , async (req, res) => {
+        let {isActive , id } = req.params ;
+        try{
+            ProductDao.findOneAndUpdate({_id : id } , {status : isActive } , {new :true } ,(err, rs)=>{
+                console.log(rs);
+                return res.send({error :false , message : 'Thành công!', status : rs.status })
+            })
+        }catch (e) {
+            console.log(e)
+            return res.send({error :true , message : e.message})
+        }
+
+    })
+
 }

@@ -15,7 +15,7 @@ import {trialRegisterApi} from "../../api/trial-register/trial-register";
 import {cartState} from "../../../security/services/cart-state";
 import {cartApi} from "../../api/cart/cart-api";
 import {viewApi} from "../../api/view/view-api";
-
+import classnames from 'classnames';
 export class ProductPreview extends React.Component {
     constructor(props) {
         super(props);
@@ -116,7 +116,8 @@ export class ProductPreview extends React.Component {
 
                                 <div className="col-lg-4 preview-mid">
                                     <h3 className="product-name">{product.name}</h3>
-                                    <div className="price-box">{formatter.format(product.price)}</div>
+                                    <div className={classnames("price-box" , !product.status && "non-active")}>{formatter.format(product.price)}</div>
+                                    {!product.status && <span>(Sản phẩm ngừng bán )</span> }
                                     <div className="view-counting">
                                         <i className="fas fa-eye"></i>
                                         <span>Đã xem: {this.state.view } lần</span>
@@ -255,7 +256,10 @@ class CartAction extends React.Component {
 
                 <div
                     onClick={()=>{
-
+                        if(!product.status){
+                            alert('Sản phẩm này đang tạm dừng bán !')
+                            return ;
+                        }
                         let cart =  cartState.getState();
 
                         cartApi.submitCart( cart ? cart._id : null , product._id ,  1).then(data =>{
