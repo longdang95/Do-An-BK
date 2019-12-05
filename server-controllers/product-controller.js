@@ -118,4 +118,13 @@ module.exports = (app) => {
 
     })
 
+    // update tất cả status của sản phẩm = 1
+    app.get('/product/update', async (req, res)=>{
+        ProductDao.update({}, {status: true  }, {multi: true},
+            function(err, num) {
+                console.log("updated "+num);
+                return res.send(num)
+            }
+        );
+    })
 }
