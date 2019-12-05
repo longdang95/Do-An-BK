@@ -44,15 +44,15 @@ module.exports =(app )=>{
         for(let i = 0 ; i < 30 ; i++){
             let time = startTime + 24*60*60*1000*i ; // thời gian mỗi lần tăng 1 ngày
             inventoryData.push([time , getRandomNumber(50 , 60)*100000 ]); // lấy giá trị giá ngẫu nhiên từ 5 triệu đến 6 triệu
-            pmData.push([time , getRandomNumber(60, 75)*100000]); // lấy giá trị ngẫu nhiên giía từ 6 triệu đến 7 triệu rưỡi
+            pmData.push([time , getRandomNumber(100, 2000)*100000]); // lấy giá trị ngẫu nhiên giía từ 10 triệu đến 200 triệu rưỡi
         }
 
-        let pm  = await PaymentDao.find({status : 2 }) ;
-         pmData = [] ;
-        for( let p of pm ){
-            let cart = await CartDao.findOne({_id  :  p.cartId } ) ;
-            pmData.push([new Date(cart.created).getTime() ,  cart.total_price ])
-        }
+        // let pm  = await PaymentDao.find({status : 2 }) ;
+        //  pmData = [] ;
+        // for( let p of pm ){
+        //     let cart = await CartDao.findOne({_id  :  p.cartId } ) ;
+        //     pmData.push([new Date(cart.created).getTime() ,  cart.total_price ])
+        // }
         return  res.send({inventoryData , pmData })
     })
 
