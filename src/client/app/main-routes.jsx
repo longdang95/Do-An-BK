@@ -21,6 +21,7 @@ import {WareHousing} from "./ware-housing/ware-housing";
 import {PaymentDetail} from "./payment-detail/payment-detail";
 import {Dashboard} from "./dashboard/dashboard";
 import {ManageProducts} from "./manage-products/manage-products";
+import {UpdateBanners} from "./update-banners/update-banners";
 
 let redirect = (locate) => {
     return class RedirectRoute extends BaseComponent {
@@ -80,6 +81,7 @@ export class MainRoutes extends BaseComponent {
                         <Route path="/payments" exact component={authenRoute(ManagePayments)}/>
                         <Route path="/dashboard" exact component={authenRoute(Dashboard)}/>
                         <Route path="/products" exact component={authenRoute(ManageProducts)}/>
+                        <Route path="/update-banners" exact component={authenRoute(UpdateBanners)}/>
                         <Route path="/payment-detail/:sessionId" exact component={PaymentDetail} />
                         <Route path="/preview/:slug" exact component={ProductPreview}/>
                         <Route exact render={() => <Redirect to="/"/>}/>

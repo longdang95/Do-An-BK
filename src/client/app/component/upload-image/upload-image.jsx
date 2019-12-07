@@ -34,6 +34,7 @@ export class UploadImage extends React.Component{
                     className="inputImage"
                     multiple
                     onChange={(e)=>this.handleImgFile(e)}
+                    accept="image/x-png,image/gif,image/jpeg"
                     // ref={inputFile => this.inputFile= inputFile}
                 />
                 <div className='images-show'>
