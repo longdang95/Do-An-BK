@@ -19,10 +19,15 @@ export class ManageProducts  extends React.Component {
         };
 
         productApi.getProducts().then(data =>{
-            this.setState({ products : data.list , pagination: {
+            this.setState({loading :true })
+            this.setState({
+                products : data.list ,
+                pagination: {
                     current : 1,
                     total: data.list.length
-                } })
+                },
+                loading:false
+            })
         })
     }
 
@@ -99,7 +104,22 @@ export class ManageProducts  extends React.Component {
                 dataIndex :'cpu_name'
             },
             {
-                title : 'Hành động',
+                title : 'Chỉnh sửa',
+                dataIndex :'',
+                align:'right',
+                render: (item) => {
+                    return (
+                        <Button
+                            href={`/edit-product/${item._id}`}
+                            type="primary" shape="round" size='normal'
+                        >
+                            <i className="far fa-edit"></i>
+                        </Button>
+                    )
+                }
+            },
+            {
+                title : 'Thiết lập trạng thái',
                 align:'right',
                 dataIndex :'',
                 render: (item) => {
@@ -119,6 +139,9 @@ export class ManageProducts  extends React.Component {
         return(
            <AdminLayout>
                <div className='manage-products'>
+                   <div className="main-container">
+                       <h3>Quản lý danh sách sản phẩm:</h3>
+                   </div>
                    <div className='row main-container'>
                        <Table
                            size='middle'
@@ -126,7 +149,7 @@ export class ManageProducts  extends React.Component {
                            rowKey={record => record._id}
                            dataSource={products}
                            pagination={this.state.pagination}
-                           // loading={this.state.loading}
+                           loading={this.state.loading}
                            onChange={this.handleTableChange}
                        />
                    </div>

@@ -88,7 +88,10 @@ class MidContent extends React.Component {
                         <SimpleSlider
                             images={banners}
                             renImage={(image,index)=>(
-                                <img key={index}  style={{width : '100%' , margin: "0 auto"}} src={image.filePath} alt=""/>
+                                <a href={image.redirect_link}>
+                                    <img
+                                        key={index}  style={{width : '100%' , margin: "0 auto"}} src={image.filePath} alt=""/>
+                                </a>
                             )}
                             settings={{
                                 infinite: true,

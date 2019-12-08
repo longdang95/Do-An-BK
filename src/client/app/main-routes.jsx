@@ -23,6 +23,7 @@ import {Dashboard} from "./dashboard/dashboard";
 import {ManageProducts} from "./manage-products/manage-products";
 import {UpdateBanners} from "./update-banners/update-banners";
 import {EditBanners} from "./edit-banners/edit-banners";
+import {EditProductPage} from "./edit-product-page/edit-product-page";
 
 let redirect = (locate) => {
     return class RedirectRoute extends BaseComponent {
@@ -77,6 +78,7 @@ export class MainRoutes extends BaseComponent {
                         <Route path="/mobile" component={BrandList}/>
                         <Route path="/checkout" component={haveCart(CheckoutPage)}/>
                         <Route path="/add-product" exact component={authenRoute(AddProductPage)}/>
+                        <Route path="/edit-product/:id" exact component={authenRoute(EditProductPage)}/>
                         <Route path="/trials" exact component={authenRoute(ManageTrials)}/>
                         <Route path="/warehousing" exact component={authenRoute(WareHousing)}/>
                         <Route path="/payments" exact component={authenRoute(ManagePayments)}/>

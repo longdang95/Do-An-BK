@@ -10,6 +10,8 @@ const findOneBySlug = (slug) => new Promise((res, rej) => {
     })
 })
 
+const _ =require('lodash')
+
 
 const findSamePrice = (gT, lT) => new Promise((res, rej) => {
     ProductDao.find({price: {$gte: gT, $lte: lT}}, (err, ret) => {
@@ -28,6 +30,32 @@ module.exports = (app) => {
             }
             return res.send({error: false, product: p, message: "Thêm sản phẩm thành công !"})
         } )
+    })
+
+
+    // sửa sản phẩm theo id;
+    app.post('/edit-product' ,async (req,res)=>{
+        try{
+            let prd = await ProductDao.findOneAndUpdate({_id : req.body._id }, _.omit(req.body , '_id') , {new :true });
+            return res.send({error :false , product : prd })
+        }catch(e){
+            console.log(e)
+            return res.send({error :true , message :'Cập nhật thất bại !'})
+        }
+    })
+
+
+    // tìm sản phẩm theo ID ;
+    app.get('/get-product/:id',async (req, res)=>{
+
+        try{
+            let product =  await ProductDao.findOne({_id : req.params.id}) ;
+            return res.send({product : product})
+        }catch(e){
+            console.log(e);
+
+            return res.send({product : null })
+        }
     })
 
 

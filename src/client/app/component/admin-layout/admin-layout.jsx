@@ -63,25 +63,43 @@ class LeftSideMenuBar  extends React.Component {
                         </Link>
 
                     </Menu.Item>
-                    <Menu.Item key="5">
+                    <Menu.Item key="2">
                         <Link to='/add-product'>
                             Thêm sản phẩm mới
                         </Link>
                     </Menu.Item>
-                    <Menu.Item key="2">
+
+                    <Menu.Item key="3">
+                        <Link to='/products'>
+                           Quản lý sản phẩm
+                        </Link>
+                    </Menu.Item>
+
+                    <Menu.Item key="4">
                         <Link to='/trials'>
                             Danh Sách Dùng Thử
                         </Link>
                     </Menu.Item>
-                    <Menu.Item key="3">
+                    <Menu.Item key="5">
                         <Link to='/payments'>
                             Hóa Đơn
                         </Link>
                     </Menu.Item>
 
-                    <Menu.Item key="4">
+                    <Menu.Item key="6">
                         <Link to='/warehousing'>
                             Nhập Kho
+                        </Link>
+                    </Menu.Item>
+
+                    <Menu.Item key="7">
+                        <Link to='/update-banners'>
+                            Update ảnh bìa
+                        </Link>
+                    </Menu.Item>
+                    <Menu.Item key="8">
+                        <Link to='/edit-banners'>
+                            Quản lý ảnh bìa
                         </Link>
                     </Menu.Item>
                 </Menu>
