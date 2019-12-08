@@ -158,6 +158,10 @@ export class CheckoutPage extends React.Component {
                                         ))
                                     }
                                 </div>
+                                <hr/>
+                                <div className='total-price'>
+                                    Tổng tiền: {formatter.format(cart.total_price || 0)}
+                                </div>
                             </div>
                         </div>
 
