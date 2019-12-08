@@ -1,5 +1,6 @@
 # Đồ Án Bách Khoa
-##### Đặng Văn Long 20138681
+*Student: Dang Van Long
+Studen ID: 20138681*
 
 ## Technologies & Libraries Used:
 

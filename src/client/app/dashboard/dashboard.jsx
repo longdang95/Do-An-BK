@@ -79,8 +79,8 @@ export class Dashboard extends React.Component {
 
                                                 <div className="col-lg-7">
                                                     <h4>Máy bán trong tháng</h4>
-                                                    <h5 >3000</h5>
-                                                    <h5 style={{color : 'green'}} >3.3 %</h5>
+                                                    <h5 >3110</h5>
+                                                    <h5 style={{color : 'green'}} >23.1 %</h5>
                                                 </div>
                                                 <div className="col-lg-5">
                                                     <SmallLineChart data={sparkline.inventoryData.map(o => (o[1]))}/>
@@ -94,8 +94,8 @@ export class Dashboard extends React.Component {
                                             <div className='row no-margin'>
                                                 <div className="col-lg-7">
                                                     <h4>Máy bán trong tuần</h4>
-                                                    <h5>3000</h5>
-                                                    <h5 style={{color : 'green'}} >3.3 %</h5>
+                                                    <h5>730</h5>
+                                                    <h5 style={{color : 'green'}} >13.3 %</h5>
                                                 </div>
                                                 <div className="col-lg-5">
                                                     <SmallLineChart data={sparkline.pmData.map(o => (o[1]))}/>
@@ -108,8 +108,8 @@ export class Dashboard extends React.Component {
                                             <div className='row sum-content no-margin'>
                                                 <div className="col-lg-7">
                                                     <h4>So với tháng trước</h4>
-                                                    <h5>3000</h5>
-                                                    <h5 style={{color : 'green'}}>3.3 %</h5>
+                                                    <h5>+2240</h5>
+                                                    <h5 style={{color : 'green'}}>23.3 %</h5>
                                                 </div>
                                                 <div className="col-lg-5">
                                                     <SmallLineChart data={sparkline.inventoryData.map(o => (o[1]))}/>
