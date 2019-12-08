@@ -46,7 +46,7 @@ module.exports = (app) => {
 
 
     // tìm sản phẩm theo ID ;
-    app.get('/get-product/:id',async (req, res)=>{
+    app.get('/get-product-by-id/:id',async (req, res)=>{
 
         try{
             let product =  await ProductDao.findOne({_id : req.params.id}) ;

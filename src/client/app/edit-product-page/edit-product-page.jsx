@@ -15,7 +15,7 @@ export class EditProductPage extends React.Component {
         };
 
         this.prdId = props.match.params.id;
-        productApi.getProduct(this.prdId).then(({product}) => {
+        productApi.getProductById(this.prdId).then(({product}) => {
             this.setState({product: {...product, ram: {value: product.ram}, cpu: {value: product.cpu}}, loading: false})
         })
     }
