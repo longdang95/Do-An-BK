@@ -94,7 +94,7 @@ class LeftSideMenuBar  extends React.Component {
 
                     <Menu.Item key="7">
                         <Link to='/update-banners'>
-                            Update ảnh bìa
+                            Ảnh Slide
                         </Link>
                     </Menu.Item>
                     <Menu.Item key="8">
