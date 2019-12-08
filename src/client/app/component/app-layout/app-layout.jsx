@@ -5,6 +5,7 @@ import {cartState} from "../../../../security/services/cart-state";
 import {comparedDevicesState} from "../../../../security/services/compared-devices-state";
 import SimpleSlider from "./app-header/slide-image/slide-image";
 import {brands, brandsEnum} from "../../commond";
+import {bannerApi} from "../../../api/banner/banner-api";
 
 export class AppLayout extends React.Component {
     constructor(props) {
@@ -54,28 +55,15 @@ class MidContent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            banners : null
         };
+        bannerApi.getActiveBanners().then(data =>{
+            this.setState({ banners : data })
+        })
     }
 
     render() {
-        let images=[
-            {
-                src:'https://i.imgur.com/DCyhT6u.png'
-            },
-            {
-                src:'https://i.imgur.com/GtBR2w4.png'
-            },
-            {
-                src:'https://i.imgur.com/s401dLr.png'
-            },
-            {
-                src:'https://i.imgur.com/eqxbBfA.png'
-            },
-            {
-                src:'https://i.imgur.com/yJq8nyZ.png'
-            }
-        ]
+        const {banners} =this.state;
         return(
             <div className='mid-area'>
                 <div className="content flex-row">
@@ -93,17 +81,14 @@ class MidContent extends React.Component {
                                 ))
                             }
                         </div>
-                        {/*<div className='sale-info'>*/}
-                        {/*    BLACK FRIDAY*/}
-                        {/*</div>*/}
                     </div>
 
 
                     <div className='slide-image'>
                         <SimpleSlider
-                            images={images}
+                            images={banners}
                             renImage={(image,index)=>(
-                                <img key={index}  style={{width : '100%' , margin: "0 auto"}} src={image.src} alt=""/>
+                                <img key={index}  style={{width : '100%' , margin: "0 auto"}} src={image.filePath} alt=""/>
                             )}
                             settings={{
                                 infinite: true,

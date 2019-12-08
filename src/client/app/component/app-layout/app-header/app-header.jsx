@@ -20,48 +20,10 @@ export class AppHeader extends React.Component {
     }
 
     render() {
-        let leftItems = [{
-            label: 'Menu',
-        }, {
-            label: 'Home Page'
-        }
-        ]
-        let rightItems = [{
-            label: 'Liên hệ'
-        }, {
-            label: 'Tài khoản'
-        }, {
-            label: 'Blog'
-        }, {
-            label: 'Đăng nhập'
-        }]
         const cart = cartState.getState() || null;
         return (
             <div className='app-header'>
                 <div className='header-top'>
-                    <div className="main-container">
-                        {/*<div className="header-left">*/}
-                        {/*    {*/}
-                        {/*        leftItems.map((o, i) => (*/}
-                        {/*            <div key={i} className='header-item'>*/}
-                        {/*                {o.label}*/}
-                        {/*            </div>*/}
-                        {/*        ))*/}
-                        {/*    }*/}
-
-
-                        {/*</div>*/}
-
-                        {/*<div className="header-right nav-item">*/}
-                        {/*    {*/}
-                        {/*        rightItems.map((o, i) => (*/}
-                        {/*            <div key={i} className='header-item'>*/}
-                        {/*                {o.label}*/}
-                        {/*            </div>*/}
-                        {/*        ))*/}
-                        {/*    }*/}
-                        {/*</div>*/}
-                    </div>
                 </div>
                 <div className='header-mid'>
                     <div className="main-container">

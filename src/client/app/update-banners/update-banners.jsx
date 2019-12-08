@@ -13,8 +13,9 @@ export class UpdateBanners extends React.Component {
     }
     handleUpload(){
         const {images} = this.state;
-        bannerApi.updateBanners({images}).then(data =>{
-            console.log(data);
+        bannerApi.updateBanners({images}).then(({error , message}) =>{
+            alert(message);
+            this.setState({images : []})
         })
     }
     canUpload(){
