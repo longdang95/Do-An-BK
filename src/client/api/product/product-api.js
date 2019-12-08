@@ -4,7 +4,7 @@ import {covertToQueryString} from "../../../../security/commond-be";
 export const productApi = {
     addProduct : (draft) => api.post('/api/add-product',draft),
     editProduct : (draft) => api.post('/api/edit-product', draft ),
-    getProduct :(id) => api.get(`/api/get-product/${id}`),
+    getProductById :(id) => api.get(`/api/get-product-by-id/${id}`),
     getProducts : () => api.get("/api/get-products"),
     getProductBySlug : (slug) => api.get(`/api/get-product/${slug}`),
     getSamePrice  : (slug)  => api.get(`/api/get-same-price/${slug}`),
