@@ -26,4 +26,21 @@ module.exports=(app)=>{
             }
         })
     })
+
+    app.post("/register", async (req, res) =>{
+        const {username, password, re_password} = req.body;
+
+        try{
+            let existUser =  await UserDao.findOne({ username : username}) ;
+            if(existUser){
+                return res.send({error : true , message : 'Username đã tồn tại !'})
+            }
+            let user =  await UserDao.create({username , password : crypto.createHash('md5').update(password).digest("hex") }) ;
+            return res.send({message : 'Đăng kí thành công !', error :false , user : { _id : user._id , username : user.username , created : user.created }})
+        }catch(e){
+            console.log(e);
+            return res.send({error :true , message :'Khong thanh cong !'})
+        }
+
+    })
 }

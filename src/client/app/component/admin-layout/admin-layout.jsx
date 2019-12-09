@@ -12,7 +12,7 @@ export class AdminLayout extends React.Component {
     }
 
     render() {
-        const {showMenu =true } =this.props ;
+        const {showSideBar =true } =this.props ;
         return(
             <div className='admin-layout'>
                 <div className="header">
@@ -27,7 +27,7 @@ export class AdminLayout extends React.Component {
                 </div>
 
                 <div className="main-container main-center">
-                    <LeftSideMenuBar/>
+                    {showSideBar && <LeftSideMenuBar/> }
                     {this.props.children}
                 </div>
                 <AppFooter/>
