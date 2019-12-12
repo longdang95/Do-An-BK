@@ -19,7 +19,8 @@ export class MenuPanel extends React.Component {
             label: 'Dashboard',
             link : '/dashboard'
         }, {
-            label: 'People'
+            label: 'Đơn Hàng',
+            link : '/payments'
         }]
         return (
             <div className='menu-panel'>
