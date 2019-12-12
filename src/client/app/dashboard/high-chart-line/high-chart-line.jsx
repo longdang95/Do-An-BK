@@ -19,7 +19,7 @@ export class HighChartLine extends React.Component{
          */
         function createChart() {
 
-            Highcharts.stockChart('container', {
+            Highcharts.stockChart('highchart-container', {
 
                 rangeSelector: {
                     selected: 4
@@ -75,7 +75,7 @@ export class HighChartLine extends React.Component{
     }
     render(){
         return(
-            <div id="container" style={{width:'100%',  height :400}}></div>
+            <div id="highchart-container" style={{width:'100%',  height :400}}></div>
         );
     }
 }

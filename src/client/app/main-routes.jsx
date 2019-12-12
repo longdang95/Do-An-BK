@@ -24,6 +24,8 @@ import {ManageProducts} from "./manage-products/manage-products";
 import {UpdateBanners} from "./update-banners/update-banners";
 import {EditBanners} from "./edit-banners/edit-banners";
 import {EditProductPage} from "./edit-product-page/edit-product-page";
+import {RegisterPage} from "./register/register";
+import {ManageInventory} from "./manage-inventory/manage-inventory";
 
 let redirect = (locate) => {
     return class RedirectRoute extends BaseComponent {
@@ -73,6 +75,7 @@ export class MainRoutes extends BaseComponent {
                     <Switch>
                         <Route path="/" exact component={HomePage}/>
                         <Route path="/login" exact component={unAuthenRoute(LoginPage)}/>
+                        <Route path="/register" exact component={RegisterPage}/>
                         <Route path="/contact" exact component={Contact}/>
                         <Route path="/compare" component={CompareDevices}/>
                         <Route path="/mobile" component={BrandList}/>
@@ -81,6 +84,7 @@ export class MainRoutes extends BaseComponent {
                         <Route path="/edit-product/:id" exact component={authenRoute(EditProductPage)}/>
                         <Route path="/trials" exact component={authenRoute(ManageTrials)}/>
                         <Route path="/warehousing" exact component={authenRoute(WareHousing)}/>
+                        <Route path="/manage-warehousing" exact component={authenRoute(ManageInventory)}/>
                         <Route path="/payments" exact component={authenRoute(ManagePayments)}/>
                         <Route path="/dashboard" exact component={authenRoute(Dashboard)}/>
                         <Route path="/products" exact component={authenRoute(ManageProducts)}/>
