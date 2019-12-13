@@ -35,4 +35,43 @@
       flex : 7 ;
     }
   }
+  .inventory-table , .inventory{
+    margin-top 50px;
+    -webkit-box-shadow: 0px 0px 30px -1px rgba(0,0,0,0.11);
+    -moz-box-shadow: 0px 0px 30px -1px rgba(0,0,0,0.11);
+    box-shadow: 0px 0px 30px -1px rgba(0,0,0,0.11);
+    padding 20px;
+    background white;
+    .product-info{
+      align-items center;
+      .product-image{
+        border-radius 50%;
+        margin-right 20px;
+      }
+      .product-name{
+        font-weight 600;
+      }
+    }
+    .status{
+      .circle{
+        width 5px;
+        height 5px;
+        border-radius 50% ;
+        display inline-block;
+        margin-right 20px;
+        &.hangton{
+          background red ;
+        }
+        &.hangmoi{
+          background green ;
+        }
+        &.schedule{
+          background #0c85d0
+        }
+      }
+    }
+    .fa-ellipsis-v{
+      font-size 15px;
+    }
+  }
 }
