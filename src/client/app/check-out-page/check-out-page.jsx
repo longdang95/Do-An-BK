@@ -88,7 +88,7 @@ export class CheckoutPage extends React.Component {
                                                     style={{
                                                         color: 'red',
                                                         'font-size': '12px'
-                                                    }}>{o.onlyNumber ? " (only number)" : ""}</span></h5>
+                                                    }}>{o.onlyNumber ? " (CMND và CCCD)" : ""}</span></h5>
                                             <div className="form-group">
                                                 {
                                                     o.type === 'area' ? (

@@ -135,7 +135,7 @@ export class ProductPreview extends React.Component {
                                             let modalTrial = modals.openModal({
                                                 content: <TrialModal
                                                     modalTitle={<Fragment>Đăng ký dùng thử sản phẩm <strong
-                                                        style={{color: 'red'}}>"{product.name}"</strong></Fragment>}
+                                                        style={{color: 'black'}}>{product.name}</strong></Fragment>}
                                                     onOke={(draft) => {
                                                         trialRegisterApi.saveTrial({product, ...draft}).then(({error, errors}) =>{
                                                             if(error){
