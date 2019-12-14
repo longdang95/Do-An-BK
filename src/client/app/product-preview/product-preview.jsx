@@ -117,10 +117,10 @@ export class ProductPreview extends React.Component {
                                 <div className="col-lg-4 preview-mid">
                                     <h3 className="product-name">{product.name}</h3>
                                     <div className={classnames("price-box" , !product.status && "non-active")}>{formatter.format(product.price)}</div>
-                                    {!product.status && <span>(Sản phẩm ngừng bán )</span> }
+                                    {!product.status && <span>(Sản phẩm hiện tại đang ngừng bán)</span> }
                                     <div className="view-counting">
                                         <i className="fas fa-eye"></i>
-                                        <span>Đã xem: {this.state.view } lần</span>
+                                        <span>Lượt xem: {this.state.view } </span>
                                     </div>
                                     <div className="product-des">
                                         {/*{product.description}*/}
@@ -135,7 +135,7 @@ export class ProductPreview extends React.Component {
                                             let modalTrial = modals.openModal({
                                                 content: <TrialModal
                                                     modalTitle={<Fragment>Đăng ký dùng thử sản phẩm <strong
-                                                        style={{color: 'red'}}>"{product.name}"</strong></Fragment>}
+                                                        style={{color: 'black'}}>{product.name}</strong></Fragment>}
                                                     onOke={(draft) => {
                                                         trialRegisterApi.saveTrial({product, ...draft}).then(({error, errors}) =>{
                                                             if(error){

@@ -60,7 +60,7 @@ export class TrialModal extends React.Component {
                 }
                 <div className="col-md-12">
                     <span className='warning-label'>
-                        (* Chú ý: Mỗi 1 sản phẩm được mượn mặc định 3 ngày ! )
+                        Chú ý: Mỗi khách hàng chỉ được mượn một sản phẩm trong một tháng và thời gian sử dụng tối đa là 3 ngày.
                     </span>
                 </div>
 
