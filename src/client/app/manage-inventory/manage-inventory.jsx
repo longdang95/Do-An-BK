@@ -127,7 +127,9 @@ export class ManageInventory extends React.Component {
             {
                 title: 'MẶT HÀNG',
                 dataIndex: '',
-                render: (item) => <div className='row product-info'>
+                render: (item) => <div
+                    onClick={()=> this.props.history.push('/product-inventory')}
+                    className='row product-info'>
                     <img className='product-image' width={40} src={item.image} alt=""/>
                     <span className='product-name'>{item.product_name}</span>
                 </div>
@@ -149,7 +151,9 @@ export class ManageInventory extends React.Component {
             {
                 title: 'NHÀ PHÂN PHỐI',
                 dataIndex: 'provider',
-                render: (item) => <img height={40} src={item} alt=""/>
+                render: (item) => <img
+                    onClick={()=> this.props.history.push('/provider')}
+                    height={40} src={item} alt=""/>
             },
             {
                 title: 'SỐ LƯỢNG CÒN LẠI',
@@ -170,7 +174,9 @@ export class ManageInventory extends React.Component {
             {
                 title: 'TÊN MÁY',
                 dataIndex: '',
-                render: (item) => <div className='row product-info'>
+                render: (item) => <div
+                    onClick={()=> this.props.history.push('/product-inventory')}
+                    className='row product-info'>
                     <img className='product-image' width={40} src={item.image} alt=""/>
                     <span className='product-name'>{item.product_name}</span>
                 </div>
@@ -198,7 +204,9 @@ export class ManageInventory extends React.Component {
             {
                 title: 'BÊN NHẬN/GỬI',
                 dataIndex: '',
-                render: (item) => item.isProvider ? <img height={40} src={item.provider} alt=""/> : 'Đơn hàng #123'
+                render: (item) => item.isProvider ? <img
+                    onClick={()=> this.props.history.push('/provider')}
+                    height={40} src={item.provider} alt=""/> : 'Đơn hàng #123'
             },
             {
                 title: "",

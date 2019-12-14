@@ -27,6 +27,8 @@ import {EditProductPage} from "./edit-product-page/edit-product-page";
 import {RegisterPage} from "./register/register";
 import {ManageInventory} from "./manage-inventory/manage-inventory";
 import {UserPayments} from "./user-payments/user-payments";
+import {Provider} from "./provider/provider";
+import {ProductInventory} from "./product-inventory/product-inventory";
 
 let redirect = (locate) => {
     return class RedirectRoute extends BaseComponent {
@@ -55,11 +57,11 @@ export class MainRoutes extends BaseComponent {
     render() {
 
         let token = localStorage.getItem("token");
-        let authenRoute = (Comp) => token ? Comp : redirect("/manage/login");
-        let unAuthenRoute = (Comp) => !token ? Comp : redirect("/manage");
+        let authenRoute = (Comp) => token ? Comp : redirect("/login");
+        let unAuthenRoute = (Comp) => !token ? Comp : redirect("/");
         const requireAdmin = (comp) => {
             if (!token) {
-                return redirect("/manage/login");
+                return redirect("/login");
             }
             let user = JSON.parse(localStorage.getItem("user-info"))
             if (user.isAdmin) {
@@ -88,6 +90,8 @@ export class MainRoutes extends BaseComponent {
                         <Route path="/warehousing" exact component={authenRoute(WareHousing)}/>
                         <Route path="/manage-warehousing" exact component={authenRoute(ManageInventory)}/>
                         <Route path="/payments" exact component={authenRoute(ManagePayments)}/>
+                        <Route path="/provider" exact component={authenRoute(Provider)}/>
+                        <Route path="/product-inventory" exact component={authenRoute(ProductInventory)}/>
                         <Route path="/dashboard" exact component={authenRoute(Dashboard)}/>
                         <Route path="/products" exact component={authenRoute(ManageProducts)}/>
                         <Route path="/update-banners" exact component={authenRoute(UpdateBanners)}/>

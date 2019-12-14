@@ -1,4 +1,5 @@
 import React, {Fragment} from 'react';
+import {userServices} from "../../../../services/user-info";
 
 export class MenuPanel extends React.Component {
     constructor(props) {
@@ -7,28 +8,43 @@ export class MenuPanel extends React.Component {
     }
 
     render() {
+
+        let user = userServices.getUser();
+
         let menuItems = [{
             label: 'Home'
         }, {
             label: 'Log In',
-            link : '/login'
+            link: '/login'
         }, {
             label: 'Categories',
-            link : '/mobile?brand=all'
+            link: '/mobile?brand=all'
         }, {
             label: 'Dashboard',
-            link : '/dashboard'
+            link: '/dashboard'
         }, {
             label: 'Đơn Hàng',
-            link : '/payments'
+            link: '/payments'
         }]
+
+        let menuRights = [
+            {
+                label: 'Đăng ký',
+                link: '/register'
+            },
+            {
+                label: 'Đăng nhập',
+                link: '/login'
+            }
+        ];
+
         return (
             <div className='menu-panel'>
                 <div className='main-container'>
                     <div className="header-left">
                         {
                             menuItems.map((o, i) => (
-                                <a key={i}  className='none-underline' href={o.link || '#'}>
+                                <a key={i} className='none-underline' href={o.link || '#'}>
                                     <div className='menu-item'>
                                         {o.label}
                                     </div>
@@ -38,7 +54,15 @@ export class MenuPanel extends React.Component {
                     </div>
 
                     <div className="header-right">
-
+                        { !user &&
+                            menuRights.map((o,i)=> (
+                                <a key={i} className='none-underline' href={o.link || '#'}>
+                                    <div className='menu-item'>
+                                        {o.label}
+                                    </div>
+                                </a>
+                            ))
+                        }
                     </div>
                 </div>
             </div>
@@ -56,7 +80,7 @@ class MenuDropdown extends React.Component {
 
     render() {
         let {menu, index} = this.props;
-        const {display}  =this.state;
+        const {display} = this.state;
         return (
             <div
                 onMouseEnter={() => this.setState({display: true})}
