@@ -5,6 +5,8 @@ import {Table, Tag} from "antd";
 import moment from "moment";
 import {formatter} from "../commond";
 import {AntdTable} from "./antd-table";
+import Button from "antd/es/button";
+import Icon from "antd/es/icon";
 
 export class ManageInventory extends React.Component {
     constructor(props) {
@@ -214,11 +216,15 @@ export class ManageInventory extends React.Component {
                     <div className="row main-container stat-inventory">
                         <div className='stat-left flex-column'>
                             <div className="stat-card">
+                                <Button type="primary" href="/warehousing" block>
+                                    Nhập Kho
+                                </Button>
+                            </div>
+                            <div className="stat-card">
                                 <h4>Tổng máy trong kho</h4>
                                 <span>2,340</span>
                                 <i className="fas fa-chart-pie"></i>
                             </div>
-
                             <div className="stat-card">
                                 <h4>Kho còn trống</h4>
                                 <span>150 chỗ</span>

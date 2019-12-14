@@ -5,6 +5,8 @@ import {Select2} from "../common/select/select2";
 import {productApi} from "../../api/product/product-api";
 import {SearchDevice} from "../compare-divices/search-device/search-device";
 import {inventoryApi} from "../../api/inventory/inventory-api";
+import Button from "antd/es/button";
+import Icon from "antd/es/icon";
 
 // Trang thêm sản phẩm vào kho
 export class WareHousing extends React.Component {
@@ -113,11 +115,20 @@ export class WareHousing extends React.Component {
                                         placeholder='Số lượng'/>
                                 </div>
                                 <div className="col-lg-3">
-                                    <button
+                                    <Button
+                                        type="primary"
                                         onClick={()=> this.handleSubmit()}
-                                        className='btn add-quantity btn-primary'>
+                                        className='add-quantity'
+                                    >
                                         Thêm vào kho
-                                    </button>
+                                        <Icon type="right" />
+                                    </Button>
+
+                                    {/*<button*/}
+                                    {/*    onClick={()=> this.handleSubmit()}*/}
+                                    {/*    className='btn add-quantity btn-primary'>*/}
+                                    {/*    Thêm vào kho*/}
+                                    {/*</button>*/}
                                 </div>
                             </div>
 
