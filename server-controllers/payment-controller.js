@@ -1,3 +1,5 @@
+const  Security = require("../security/security-be");
+
 const PaymentDao = require("../dao/payment-dao");
 const CartDao = require("../dao/cart-dao");
 var mongoose = require("mongoose");
@@ -66,7 +68,7 @@ module.exports = (app) => {
 
     // xử lý thanh toán qua Momo
 
-    app.post('/momo/payment', async (req, res) => {
+    app.post('/momo/payment', Security.authorDetails , async (req, res) => {
         const {cartId} = req.body;
         const cart = await checkCart(cartId);
         if (cart) {
@@ -110,7 +112,7 @@ module.exports = (app) => {
             rp(ops).then(function (parsedBody) {
                 // POST succeeded...
                 if(parsedBody){
-                    PaymentDao.create({...req.body , status: 2, sessionId : parsedBody.requestId },(err, rs)=>{
+                    PaymentDao.create({...req.body , status: 2, sessionId : parsedBody.requestId , userId : req.user._id || null  },(err, rs)=>{
                         console.log(rs);
                         CartDao.findOneAndUpdate({_id: cart._id}, {active: false}, {new: true}, (err, rm) => {
                             return res.send(parsedBody)
@@ -226,5 +228,20 @@ module.exports = (app) => {
         // return res.send(session)
     })
 
+
+    app.get('/user-payments' , Security.authorDetails , async (req,res)=>{
+        try{
+            PaymentDao.find({ userId : req.user._id },(err,pms)=>{
+                CartDao.find({_id : {$in : pms.map(o => o.cartId)} , userId : req.user._id } ,(err, carts)=>{
+                    console.log(carts)
+                    let mergeData= pms.map((o,i)=> ({...o._doc , cart : carts[i] }))
+                    return res.send(mergeData)
+                })
+            })
+        }catch(e){
+            console.log(e) ;
+            return res.send([])
+        }
+    })
 
 }

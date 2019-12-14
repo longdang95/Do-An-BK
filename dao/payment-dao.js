@@ -11,5 +11,6 @@ module.exports= mongoose.model("PaymentDao",{
     sessionId : {type : String, default : null },
     phone_number: {type :String ,required: [true, ' Số điện thoại không được trống']},
     cartId: {type : mongoose.Schema.ObjectId ,required: [true, 'Cart Id không được trống']},
+    userId: { type : mongoose.Schema.ObjectId , default : null },
     created: {type: Date, default: Date.now},
 },"payment")

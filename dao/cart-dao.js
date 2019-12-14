@@ -6,5 +6,6 @@ module.exports= mongoose.model("CartDao",{
     products: Array,
     total_price :Number,
     active :{type :Boolean ,default: true },
+    userId: {type : mongoose.Schema.ObjectId , default : null },
     created: {type: Date, default: Date.now},
 },"cart")

@@ -57,7 +57,7 @@ export class ProductPreview extends React.Component {
         }
 
         const {product} = this.state;
-
+        let cart = cartState.getState();
         let Carousel = (images = null) => {
             return (
                 <Flickity
@@ -157,6 +157,7 @@ export class ProductPreview extends React.Component {
                                     </button>
 
                                     <button
+                                        disabled={!cart || !cart.products.length >=1}
                                         onClick={()=>{
                                             this.props.history.push('/checkout')
                                         }}

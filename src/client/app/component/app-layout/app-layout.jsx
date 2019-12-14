@@ -36,12 +36,13 @@ export class AppLayout extends React.Component {
 
     render() {
         let comparedDeives = comparedDevicesState.getState() ;
+        const {showAds =true } =this.props;
         return (
             <div className='app-layout'>
                 <AppHeader
                     {...this.props}
                 />
-                <MidContent/>
+                {showAds && <MidContent/>}
                 {this.props.children}
 
                 <AppFooter/>

@@ -6,6 +6,8 @@ import {SearchPanel} from "./search-panel/search-panel";
 import {productApi} from "../../../../api/product/product-api";
 import {formatter} from "../../../commond";
 import {cartApi} from "../../../../api/cart/cart-api";
+import {Avatar, Dropdown, Menu} from "antd";
+import {userServices} from "../../../services/user-info";
 
 export class AppHeader extends React.Component {
     constructor(props) {
@@ -21,6 +23,26 @@ export class AppHeader extends React.Component {
 
     render() {
         const cart = cartState.getState() || null;
+        let user = userServices.getUser() ;
+        let userMenu =(
+            <Menu>
+                <Menu.Item>
+                    <Link to="/dashboard">
+                        Sửa Thông Tin
+                    </Link>
+                </Menu.Item>
+                <Menu.Item>
+                    <Link to="/user-payments">
+                        Danh Sách Payments
+                    </Link>
+                </Menu.Item>
+                <Menu.Item>
+                    <Link to="http://www.tmall.com/">
+                        Log Out
+                    </Link>
+                </Menu.Item>
+            </Menu>
+        )
         return (
             <div className='app-header'>
                 <div className='header-top'>
@@ -60,6 +82,15 @@ export class AppHeader extends React.Component {
                                 <CartInfoDropdown
                                     cart={cart}
                                 />
+
+                                {user &&
+                                    <div className='flex-row'>
+                                        <Dropdown overlay={userMenu} placement="bottomLeft">
+                                            <Avatar src={user.avatar ? user.avatar : 'https://vomoa-images.s3.amazonaws.com/channel/b9cb1970a1242e3d456955a994090e1e-crop-c0-5__0-5-100x100.png'} />
+                                         </Dropdown>
+                                    </div>
+                                }
+
                             </div>
                         </div>
                     </div>
@@ -150,18 +181,19 @@ export class CartInfoDropdown extends React.Component {
                                 <span>Tổng tiền:</span>
                                 <span>{formatter.format(cart.total_price)}</span>
                             </div>
+                            {
+                                cart.total_price >0 &&
+                                <div
 
-                            <div
-
-                                onClick={()=>{
-                                    this.props.push('/check-out')
-                                }}
-                                className='view-cart-action'>
-                                <Link className='none-underline' to='/checkout'>
-                                    Thanh Toán
-                                </Link>
-                            </div>
-
+                                    onClick={()=>{
+                                        this.props.push('/check-out')
+                                    }}
+                                    className='view-cart-action'>
+                                    <Link className='none-underline' to='/checkout'>
+                                        Thanh Toán
+                                    </Link>
+                                </div>
+                            }
 
                         </div>
                     )

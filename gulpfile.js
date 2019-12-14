@@ -59,6 +59,12 @@ gulp.task("start-db" ,()=>{
         })
     })
 })
+
+gulp.task("init-db" ,()=>{
+    run("mongoimport --db do-an --collection user --file user.json").exec(()=>{
+        console.log('initiation done!')
+    });
+})
 gulp.task("start-db2" ,()=>{
     run("cd /usr/local/bin/mongo/").exec(()=>{
         console.log("go to mongo dir")
