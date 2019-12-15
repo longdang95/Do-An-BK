@@ -6,7 +6,7 @@ import {SearchPanel} from "./search-panel/search-panel";
 import {productApi} from "../../../../api/product/product-api";
 import {formatter} from "../../../commond";
 import {cartApi} from "../../../../api/cart/cart-api";
-import {Avatar, Dropdown, Menu} from "antd";
+import {Avatar, Button, Dropdown, Menu} from "antd";
 import {userServices} from "../../../services/user-info";
 
 export class AppHeader extends React.Component {
@@ -23,11 +23,11 @@ export class AppHeader extends React.Component {
 
     render() {
         const cart = cartState.getState() || null;
-        let user = userServices.getUser() ;
-        let userMenu =(
+        let user = userServices.getUser();
+        let userMenu = (
             <Menu>
                 <Menu.Item>
-                    <Link to="/dashboard">
+                    <Link to="/edit-user">
                         Sửa Thông Tin
                     </Link>
                 </Menu.Item>
@@ -37,9 +37,13 @@ export class AppHeader extends React.Component {
                     </Link>
                 </Menu.Item>
                 <Menu.Item>
-                    <Link to="http://www.tmall.com/">
-                        Log Out
-                    </Link>
+                    <Button
+                        type='danger'
+                        size="small"
+                        className='btn-logout'
+                    >
+                        Thoát
+                    </Button>
                 </Menu.Item>
             </Menu>
         )
@@ -84,11 +88,13 @@ export class AppHeader extends React.Component {
                                 />
 
                                 {user &&
-                                    <div className='flex-row'>
-                                        <Dropdown overlay={userMenu} placement="bottomLeft">
-                                            <Avatar src={user.avatar ? user.avatar : 'https://vomoa-images.s3.amazonaws.com/channel/b9cb1970a1242e3d456955a994090e1e-crop-c0-5__0-5-100x100.png'} />
-                                         </Dropdown>
-                                    </div>
+                                <div className='flex-row'>
+                                    <Dropdown
+                                        overlay={userMenu} placement="bottomLeft">
+                                        <Avatar
+                                            src={user.avatar ? user.avatar : 'https://vomoa-images.s3.amazonaws.com/channel/b9cb1970a1242e3d456955a994090e1e-crop-c0-5__0-5-100x100.png'}/>
+                                    </Dropdown>
+                                </div>
                                 }
 
                             </div>
@@ -107,19 +113,19 @@ export class CartInfoDropdown extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            dropdown : false
+            dropdown: false
         };
     }
 
     mouseAction = {
         onMouseLeave: () => {
             this.setState({
-                dropdown : false
+                dropdown: false
             })
         },
         onMouseEnter: () => {
             this.setState({
-                dropdown : true
+                dropdown: true
             })
         }
     }
@@ -128,78 +134,94 @@ export class CartInfoDropdown extends React.Component {
         const {cart} = this.props;
         const {dropdown} = this.state;
         let counter = cart ? cart.products.reduce((o, u) => o + u.quantity, 0) : 0;
-        return (
+        let cartPreview = (
             <div
-                {...this.mouseAction}
-                className='cart-info'>
-                <span className='counting'>{counter}</span>
-                <i className="fas fa-shopping-cart"></i>
-                <i className='fas fa-chevron-down'></i>
+                className='cart-dropdown box-shadow'>
+                <div className='top'>
+                    <span>{((cart && cart.products.length) || 0) + " sản phẩm"}</span>
+                    <span>Giỏ hàng</span>
+                </div>
+                <hr/>
                 {
-                    dropdown && cart && (
-                        <div
-                            {...this.mouseAction}
-                            className='cart-dropdown'>
-                            <div className='top'>
-                                <span>{((cart && cart.products.length) || 0) + " sản phẩm"}</span>
-                                <span>Giỏ hàng</span>
-                            </div>
-                            <hr/>
-                            {
-                                 cart.products.map((o, i) => {
-                                    return (
-                                        <Fragment>
-                                            <div
-                                                key={i}
-                                            >
-                                                <div className='cart-product flex-row'>
-                                                    <div className="product-details">
-                                                        <h4 className='no-margin'>{o.name}</h4>
-                                                        <span> {o.quantity + " x " + formatter.format(o.price)}</span>
-                                                    </div>
-                                                    <div className='product-image-container'>
-                                                        <img
-                                                            width={50}
-                                                            src={o.images[0].filePath} alt=""/>
-                                                        <i
-                                                            onClick={()=>{
-                                                                cartApi.clearProduct(cart._id , o._id).then(data =>{
-                                                                    cartState.setState(data)
-                                                                })
-                                                            }}
-                                                            className="fas fa-times"></i>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <hr/>
-                                        </Fragment>
-                                    )
-                                })
-                            }
-                            <div className='dropdown-cart-total'>
-                                <span>Tổng tiền:</span>
-                                <span>{formatter.format(cart.total_price)}</span>
-                            </div>
-                            {
-                                cart.total_price >0 &&
+                    cart.products.map((o, i) => {
+                        return (
+                            <Fragment>
                                 <div
+                                    key={i}
+                                >
+                                    <div className='cart-product flex-row'>
+                                        <div className="product-details">
+                                            <h4 className='no-margin'>{o.name}</h4>
+                                            <span> {o.quantity + " x " + formatter.format(o.price)}</span>
+                                        </div>
+                                        <div className='product-image-container'>
+                                            <img
+                                                width={50}
+                                                src={o.images[0].filePath} alt=""/>
+                                            <i
+                                                onClick={() => {
+                                                    cartApi.clearProduct(cart._id, o._id).then(data => {
+                                                        cartState.setState(data)
+                                                    })
+                                                }}
+                                                className="fas fa-times"></i>
+                                        </div>
 
-                                    onClick={()=>{
-                                        this.props.push('/check-out')
-                                    }}
-                                    className='view-cart-action'>
-                                    <Link className='none-underline' to='/checkout'>
-                                        Thanh Toán
-                                    </Link>
+                                    </div>
                                 </div>
-                            }
+                                <hr/>
+                            </Fragment>
+                        )
+                    })
+                }
+                <div className='dropdown-cart-total'>
+                    <span>Tổng tiền:</span>
+                    <span>{formatter.format(cart.total_price)}</span>
+                </div>
+                {
+                    cart.total_price > 0 &&
+                    <div
 
-                        </div>
-                    )
+                        onClick={() => {
+                            this.props.push('/check-out')
+                        }}
+                        className='view-cart-action'>
+                        <Link className='none-underline' to='/checkout'>
+                            Thanh Toán
+                        </Link>
+                    </div>
                 }
 
             </div>
         )
+        return (
+            <div className='flex-row'>
+                <Dropdown
+                    overlay={cartPreview}
+                    placement="bottomRight">
+                    <div
+                        className='cart-info'>
+                        <span className='counting'>{counter}</span>
+                        <i className="fas fa-shopping-cart"></i>
+                        <i className='fas fa-chevron-down'></i>
+                    </div>
+                </Dropdown>
+            </div>
+        )
+        // return (
+        //     <div
+        //         {...this.mouseAction}
+        //         className='cart-info'>
+        //         <span className='counting'>{counter}</span>
+        //         <i className="fas fa-shopping-cart"></i>
+        //         <i className='fas fa-chevron-down'></i>
+        //         {/*{*/}
+        //         {/*    dropdown && cart && (*/}
+        //         {/*        */}
+        //         {/*    )*/}
+        //         {/*}*/}
+        //
+        //     </div>
+        // )
     }
 }

@@ -29,6 +29,7 @@ import {ManageInventory} from "./manage-inventory/manage-inventory";
 import {UserPayments} from "./user-payments/user-payments";
 import {Provider} from "./provider/provider";
 import {ProductInventory} from "./product-inventory/product-inventory";
+import {EditUserInfo} from "./edit-user-info/edit-user-info";
 
 let redirect = (locate) => {
     return class RedirectRoute extends BaseComponent {
@@ -91,6 +92,7 @@ export class MainRoutes extends BaseComponent {
                         <Route path="/manage-warehousing" exact component={authenRoute(ManageInventory)}/>
                         <Route path="/payments" exact component={authenRoute(ManagePayments)}/>
                         <Route path="/provider" exact component={authenRoute(Provider)}/>
+                        <Route path="/edit-user" exact component={authenRoute(EditUserInfo)}/>
                         <Route path="/product-inventory" exact component={authenRoute(ProductInventory)}/>
                         <Route path="/dashboard" exact component={authenRoute(Dashboard)}/>
                         <Route path="/products" exact component={authenRoute(ManageProducts)}/>

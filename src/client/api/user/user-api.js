@@ -3,7 +3,7 @@ import {api} from "../api";
 export const userApi = {
     me:() => api.get("/api/me"),
 
-
+    updateInfo: (data) => api.post('/api/user/edit', data) ,
     login: (data)=> {
         return api.post("/api/login",data)
     },

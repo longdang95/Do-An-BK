@@ -8,6 +8,21 @@ module.exports=(app)=>{
     app.get('/me',Security.authorDetails, (req,res) =>{
         res.send(req.user);
     })
+
+    app.post('/user/edit' , Security.authorDetails , async (req, res) =>{
+        let {name , address, avatar } = req.body ;
+        console.log(avatar)
+        try{
+            UserDao.findOneAndUpdate({_id : req.user._id }, { "avatar": avatar , name : name , address : address  } ,{new :true , "fields" :{"password" : 0}},(err , rs)=>{
+                console.log(rs);
+                return res.send({error :false , message : 'Cập nhật thành công !' , user : rs })
+            });
+        }catch(e){
+            console.log(e);
+            return res.send({error : true , message : 'Cập nhật thất bại' })
+        }
+    })
+
     app.post("/login" ,(req,res)=>{
         if (_.isEmpty(req.body)) {
             res.status(400).end();

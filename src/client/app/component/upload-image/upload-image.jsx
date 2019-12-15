@@ -26,20 +26,20 @@ export class UploadImage extends React.Component{
         })
     }
     render(){
-        const {height,classNames, filePath} =this.props;
+        const {height,classNames,multiple =true , filePath} =this.props;
         return(
             <div className={classnames('upload-image',...classNames)}>
                 <input
                     type="file"
                     className="inputImage"
-                    multiple
+                    multiple={multiple}
                     onChange={(e)=>this.handleImgFile(e)}
                     accept="image/x-png,image/gif,image/jpeg"
                     // ref={inputFile => this.inputFile= inputFile}
                 />
-                <div className='images-show'>
+                <div style={{'minHeight' : height }} className='images-show'>
                     {
-                        filePath.map((o,i) =>(
+                         filePath.length > 0  &&  filePath.map((o,i) =>(
                             <img key={i} height={height} src={o.filePath || null} id='blah' alt=""/>
                         ))
                     }
