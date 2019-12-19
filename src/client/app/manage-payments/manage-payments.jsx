@@ -3,7 +3,7 @@ import {AdminLayout} from "../component/admin-layout/admin-layout";
 import {paymentApi} from "../../api/payment/payment-api";
 import {PaginationTable} from "../component/pagination-table/pagination-table";
 import moment from 'moment'
-import {formatter} from "../commond";
+import {formatter, setTitle} from "../commond";
 import {Tag} from "antd";
 
 export class ManagePayments extends React.Component {
@@ -15,6 +15,8 @@ export class ManagePayments extends React.Component {
         paymentApi.getPayments().then(data => {
             this.setState({bills: data})
         })
+        setTitle('Quản lý đơn hàng')
+
     }
 
     columns = [

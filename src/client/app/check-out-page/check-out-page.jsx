@@ -1,6 +1,6 @@
 import React from 'react';
 import {ManageLayout} from "../component/manage-layout/manage-layout";
-import {brands, formatter} from "../commond";
+import {brands, formatter, setTitle} from "../commond";
 import {Select2} from "../common/select/select2";
 import {cartState} from "../../../security/services/cart-state";
 import {ShippingSelect} from "./shipping-select/shipping-select";
@@ -11,6 +11,8 @@ export class CheckoutPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = this.initState();
+
+        setTitle('Xử lý thanh toán')
     }
 
     inputs = [

@@ -4,6 +4,7 @@ import {trialRegisterApi} from "../../api/trial-register/trial-register";
 import {PaginationTable} from "../component/pagination-table/pagination-table";
 import {CheckBox} from "../component/check-box/check-box";
 import {AdminLayout} from "../component/admin-layout/admin-layout";
+import {setTitle} from "../commond";
 export class ManageTrials extends React.Component {
     constructor(props) {
         super(props);
@@ -11,6 +12,8 @@ export class ManageTrials extends React.Component {
             trials : null,
             submitting: false
         };
+        setTitle('Quản lý dùng thử')
+
     }
     componentDidMount(){
         trialRegisterApi.getTrials().then(data =>{

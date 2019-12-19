@@ -11,6 +11,7 @@ import {inventoryApi} from "../../api/inventory/inventory-api";
 import {paymentApi} from "../../api/payment/payment-api";
 import {SearchDevice} from "../compare-divices/search-device/search-device";
 import {productApi} from "../../api/product/product-api";
+import {setTitle} from "../commond";
 
 export class Dashboard extends React.Component {
     constructor(props) {
@@ -41,6 +42,8 @@ export class Dashboard extends React.Component {
         paymentApi.getPayments().then(data => {
             this.setState({bills: data})
         })
+        setTitle('Dashboard')
+
     }
 
 

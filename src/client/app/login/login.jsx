@@ -1,6 +1,7 @@
 import React from "react";
 import {security} from "../../../security/secuiry-fe";
 import {AdminLayout} from "../component/admin-layout/admin-layout";
+import {setTitle} from "../commond";
 
 export class LoginPage extends React.Component {
     constructor(props) {
@@ -11,6 +12,8 @@ export class LoginPage extends React.Component {
             submitting: false,
             error: false
         };
+        setTitle('Login')
+
     };
 
     handleOnSubmit(e) {

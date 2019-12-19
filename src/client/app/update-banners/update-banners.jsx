@@ -4,12 +4,15 @@ import {AdminLayout} from "../component/admin-layout/admin-layout";
 import {UploadImage} from "../component/upload-image/upload-image";
 import {Button} from "antd";
 import {bannerApi} from "../../api/banner/banner-api";
+import {setTitle} from "../commond";
 export class UpdateBanners extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             images : []
         };
+        setTitle('Tải lên banners')
+
     }
     handleUpload(){
         const {images} = this.state;

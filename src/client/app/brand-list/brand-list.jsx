@@ -2,7 +2,7 @@ import React from 'react';
 import {ManageLayout} from "../component/manage-layout/manage-layout";
 import {FeaturedProducts} from "../home-page/featured-products/featured-products";
 import {productApi} from "../../api/product/product-api";
-import {brands, brandsEnum, covertToQueryString} from "../commond";
+import {brands, brandsEnum, covertToQueryString, setTitle} from "../commond";
 export class BrandList  extends React.Component {
     constructor(props) {
         super(props);
@@ -20,6 +20,8 @@ export class BrandList  extends React.Component {
         }).then(data =>{
             this.setState({ products : data})
         })
+
+        setTitle('Danh sách sản phẩm')
     }
 
     componentDidMount(){

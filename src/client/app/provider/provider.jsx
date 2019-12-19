@@ -1,7 +1,7 @@
 import React from 'react';
 import {AdminLayout} from "../component/admin-layout/admin-layout";
 import {AntdTable} from "../manage-inventory/antd-table";
-import {formatter} from "../commond";
+import {formatter, setTitle} from "../commond";
 import {Progress} from "antd";
 export class Provider extends React.Component {
     constructor(props) {
@@ -9,6 +9,8 @@ export class Provider extends React.Component {
         this.state = {
 
         };
+        setTitle('Nhà phân phối')
+
     }
 
     render() {

@@ -3,7 +3,7 @@ import {AdminLayout} from "../component/admin-layout/admin-layout";
 import {PieChart} from "../dashboard/pie-chart/pie-chart";
 import {Table, Tag} from "antd";
 import moment from "moment";
-import {formatter} from "../commond";
+import {formatter, setTitle} from "../commond";
 import {AntdTable} from "./antd-table";
 import Button from "antd/es/button";
 import Icon from "antd/es/icon";
@@ -13,6 +13,8 @@ export class ManageInventory extends React.Component {
         super(props);
         this.state = {
         };
+        setTitle('Quản lý kho')
+
     }
     render() {
         let inventories = [

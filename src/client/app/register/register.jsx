@@ -2,6 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {userApi} from "../../api/user/user-api";
 import {AdminLayout} from "../component/admin-layout/admin-layout";
+import {setTitle} from "../commond";
 
 
 
@@ -15,6 +16,8 @@ export class RegisterPage extends React.Component {
             submitting: false,
             error: false
         };
+        setTitle('Đăng ký')
+
     };
 
     handleOnSubmit(e) {

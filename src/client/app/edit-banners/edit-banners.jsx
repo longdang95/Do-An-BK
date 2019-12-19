@@ -4,6 +4,7 @@ import {Table, Tag} from "antd";
 import {bannerApi} from "../../api/banner/banner-api";
 import classnames from "classnames";
 import _ from 'lodash'
+import {setTitle} from "../commond";
 
 export class EditBanners extends React.Component {
     constructor(props) {
@@ -17,6 +18,8 @@ export class EditBanners extends React.Component {
             this.setState({banners: data})
         })
         this.editBanner = _.debounce(this.editBanner, 1500)
+        setTitle('Chỉnh sửa ảnh quảng cáo trang chủ')
+
     }
 
     handleTableChange = (pagination, filters, sorter) => {

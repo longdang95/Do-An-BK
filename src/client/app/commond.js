@@ -107,3 +107,6 @@ export const covertToQueryString = (obj)=>{
     console.log(str.toString())
     return str.toString();
 }
+
+
+export const setTitle = (tit) => document.title = tit ;

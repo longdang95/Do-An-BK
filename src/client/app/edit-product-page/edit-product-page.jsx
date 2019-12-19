@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import {AdminLayout} from "../component/admin-layout/admin-layout";
 import {productApi} from "../../api/product/product-api";
-import {brands, brandsEnum} from "../commond";
+import {brands, brandsEnum, setTitle} from "../commond";
 import {ProductFormData} from "../add-product/product-form-data/product-form-data";
 import {Button, Spin} from "antd";
 
@@ -18,6 +18,8 @@ export class EditProductPage extends React.Component {
         productApi.getProductById(this.prdId).then(({product}) => {
             this.setState({product: {...product, ram: {value: product.ram}, cpu: {value: product.cpu}}, loading: false})
         })
+        setTitle('Chỉnh sửa sản phẩm')
+
     }
 
 

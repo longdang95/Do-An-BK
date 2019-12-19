@@ -1,6 +1,6 @@
 import React from 'react';
 import {AdminLayout} from "../component/admin-layout/admin-layout";
-import {formatter} from "../commond";
+import {formatter, setTitle} from "../commond";
 import {AntdTable} from "../manage-inventory/antd-table";
 import {PieChart} from "../dashboard/pie-chart/pie-chart";
 export class ProductInventory extends React.Component {
@@ -9,6 +9,8 @@ export class ProductInventory extends React.Component {
         this.state = {
 
         };
+        setTitle('Thông tin kho của sản phẩm')
+
     }
 
     render() {

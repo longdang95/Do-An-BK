@@ -3,7 +3,7 @@ import {AppLayout, InfoBoxes} from "../component/app-layout/app-layout";
 import {ManageLayout} from "../component/manage-layout/manage-layout";
 import {productApi} from "../../api/product/product-api";
 import Flickity from 'react-flickity-component'
-import {addComparedDevice, formatter} from "../commond";
+import {addComparedDevice, formatter, setTitle} from "../commond";
 import {comparedDevicesState} from "../../../security/services/compared-devices-state";
 import {FeaturedProducts} from "../home-page/featured-products/featured-products";
 import {Editor} from "../add-product/editor/editor";
@@ -28,6 +28,8 @@ export class ProductPreview extends React.Component {
         };
 
         productApi.getProductBySlug(props.match.params.slug).then(data => {
+            setTitle('Trang sản phẩm '+ data.product.name);
+
             this.setState({
                 product: data.product
             })

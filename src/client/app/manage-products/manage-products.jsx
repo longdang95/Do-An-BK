@@ -4,7 +4,7 @@ import React from 'react';
 import {AdminLayout} from "../component/admin-layout/admin-layout";
 import {Button, Table} from "antd";
 import moment from "moment";
-import {formatter} from "../commond";
+import {formatter, setTitle} from "../commond";
 import {productApi} from "../../api/product/product-api";
 
 
@@ -29,6 +29,8 @@ export class ManageProducts  extends React.Component {
                 loading:false
             })
         })
+        setTitle('Quản lý sản phẩm')
+
     }
 
     handleActive=(item)=>{

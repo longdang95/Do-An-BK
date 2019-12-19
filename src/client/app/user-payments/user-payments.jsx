@@ -2,7 +2,7 @@ import React from 'react';
 import {AppLayout} from "../component/app-layout/app-layout";
 import {AntdTable} from "../manage-inventory/antd-table";
 import {paymentApi} from "../../api/payment/payment-api";
-import {formatter} from "../commond";
+import {formatter, setTitle} from "../commond";
 import {Avatar, Tag} from "antd";
 export class UserPayments extends React.Component {
     constructor(props) {
@@ -13,6 +13,8 @@ export class UserPayments extends React.Component {
         paymentApi.getUserPayments().then(data =>{
             this.setState({ payments : data})
         })
+        setTitle('Payments của người dùng')
+
     }
 
     render() {

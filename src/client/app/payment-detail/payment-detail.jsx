@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import {ManageLayout} from "../component/manage-layout/manage-layout";
 import {paymentApi} from "../../api/payment/payment-api";
 import {AdminLayout} from "../component/admin-layout/admin-layout";
-import {formatter} from "../commond";
+import {formatter, setTitle} from "../commond";
 export class PaymentDetail extends React.Component {
     constructor(props) {
         super(props);
@@ -26,6 +26,8 @@ export class PaymentDetail extends React.Component {
             }
 
         })
+        setTitle('Thông tin trạng thái đơn hàng')
+
     }
 
     render() {

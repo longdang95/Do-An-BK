@@ -4,7 +4,7 @@ import {UploadImage} from "../component/upload-image/upload-image";
 import {productApi} from "../../api/product/product-api";
 import {Select2} from "../common/select/select2";
 import {Editor} from "./editor/editor";
-import {brands} from "../commond";
+import {brands, setTitle} from "../commond";
 import {AdminLayout} from "../component/admin-layout/admin-layout";
 import _ from 'lodash'
 import {ProductFormData} from "./product-form-data/product-form-data";
@@ -41,7 +41,7 @@ export class AddProductPage extends React.Component {
             submitting: false,
             error: false
         };
-
+        setTitle('Thêm sản phẩm')
     }
 
 

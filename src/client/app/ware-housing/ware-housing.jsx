@@ -7,6 +7,7 @@ import {SearchDevice} from "../compare-divices/search-device/search-device";
 import {inventoryApi} from "../../api/inventory/inventory-api";
 import Button from "antd/es/button";
 import Icon from "antd/es/icon";
+import {setTitle} from "../commond";
 
 // Trang thêm sản phẩm vào kho
 export class WareHousing extends React.Component {
@@ -20,6 +21,8 @@ export class WareHousing extends React.Component {
                 list : data.list
             })
         })
+        setTitle('Thêm sản phẩm vào kho')
+
     }
     initState(){
         return(

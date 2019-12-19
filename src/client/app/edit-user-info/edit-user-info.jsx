@@ -6,6 +6,7 @@ import {userServices} from "../services/user-info";
 import {Button} from "antd";
 import {UploadImage} from "../component/upload-image/upload-image";
 import {userApi} from "../../api/user/user-api";
+import {setTitle} from "../commond";
 export class EditUserInfo extends React.Component {
     constructor(props) {
         super(props);
@@ -24,6 +25,8 @@ export class EditUserInfo extends React.Component {
                 avatar : data.avatar
             })
         })
+        setTitle('Cập nhật thông tin người dùng')
+
     }
     updateInfo(){
         userApi.updateInfo(this.state).then(data =>{

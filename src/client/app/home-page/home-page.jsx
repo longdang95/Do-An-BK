@@ -6,6 +6,7 @@ import {productApi} from "../../api/product/product-api";
 import {cartState} from "../../../security/services/cart-state";
 import {cartApi} from "../../api/cart/cart-api";
 import {api} from "../../api/api";
+import {setTitle} from "../commond";
 
 export class HomePage extends React.Component {
     constructor(props) {
@@ -18,6 +19,8 @@ export class HomePage extends React.Component {
                 products: data.list
             })
         })
+        setTitle('Trang chủ')
+
     }
 
     render() {

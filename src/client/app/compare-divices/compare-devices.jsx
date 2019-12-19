@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import {ManageLayout} from "../component/manage-layout/manage-layout";
 import {productApi} from "../../api/product/product-api";
 import {SearchDevice} from "./search-device/search-device";
-import {formatter, getParameterByName} from "../commond";
+import {formatter, getParameterByName, setTitle} from "../commond";
 import {Link} from "react-router-dom";
 export class CompareDevices  extends React.Component {
     constructor(props) {
@@ -11,6 +11,7 @@ export class CompareDevices  extends React.Component {
             value1:'',
             selected1 : null
         };
+        setTitle('So sánh sản phẩm')
     }
 
     render() {
