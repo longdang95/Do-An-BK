@@ -16,6 +16,7 @@ import {cartState} from "../../../security/services/cart-state";
 import {cartApi} from "../../api/cart/cart-api";
 import {viewApi} from "../../api/view/view-api";
 import classnames from 'classnames';
+import {RattingStar} from "./ratting-star/ratting-star";
 export class ProductPreview extends React.Component {
     constructor(props) {
         super(props);
@@ -124,9 +125,9 @@ export class ProductPreview extends React.Component {
                                         <i className="fas fa-eye"></i>
                                         <span>Lượt xem: {this.state.view } </span>
                                     </div>
-                                    <div className="product-des">
-                                        {/*{product.description}*/}
-                                    </div>
+                                    <RattingStar
+                                        rate={40}
+                                        onClick={(value)=>{}}/>
                                     <DiscountInfo/>
                                     <CartAction
                                         product={product}
