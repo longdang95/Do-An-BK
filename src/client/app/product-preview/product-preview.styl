@@ -6,6 +6,9 @@
     .featured-products{
       background white
     }
+    @media (max-width 480px){
+      padding 0 5px;
+    }
   }
   .row{
     &.description-wrap{
@@ -15,7 +18,12 @@
         margin: 0 0 20px !important
         line-height: 26px !important;
       }
-
+      @media (max-width 480px){
+        img{
+          max-width 100% ;
+        }
+        padding 0 5px;
+      }
     }
     .des-preview{
       margin-top 50px;

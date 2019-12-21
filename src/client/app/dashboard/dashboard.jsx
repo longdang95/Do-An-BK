@@ -176,13 +176,13 @@ export class Dashboard extends React.Component {
                     }
 
                     <div className='payment-infomation row main-container'>
-                        <div className="col-lg-4">
+                        <div className="col-lg-4 col-md-12">
                             {/*component thông tin kho nhập*/}
                             <InventoryInfo
                                 inventories={inventories}
                             />
                         </div>
-                        <div className="col-lg-8">
+                        <div className="col-lg-8 col-md-12">
                             {/*component thông tin thanh toán*/}
                             <PaymentInfo
                                 payments={bills}

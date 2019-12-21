@@ -1,12 +1,25 @@
 .dashboard{
   background #FFFFFF;
+  @media (max-width 480px){
+    width 100%;
+    .sum-header{
+      flex-direction column !important;
+      .head-card{
+        width 100%;
+      }
+    }
+    .payment-info{
+      margin-top 20px;
+      overflow auto;
+    }
+  }
   h1 {
     font-weight 700
     width: 100%;
     text-align: center;
     padding: 20px;
   }
-  padding 20px;
+  padding 20px 5px;
   .sum-header{
     display flex;
     flex-direction row;

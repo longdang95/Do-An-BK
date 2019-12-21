@@ -143,7 +143,7 @@ export class CartInfoDropdown extends React.Component {
                 </div>
                 <hr/>
                 {
-                    cart.products.map((o, i) => {
+                    cart && cart.products.length && cart.products.map((o, i) => {
                         return (
                             <Fragment>
                                 <div
@@ -174,12 +174,16 @@ export class CartInfoDropdown extends React.Component {
                         )
                     })
                 }
-                <div className='dropdown-cart-total'>
-                    <span>Tổng tiền:</span>
-                    <span>{formatter.format(cart.total_price)}</span>
-                </div>
                 {
-                    cart.total_price > 0 &&
+                    cart && (
+                        <div className='dropdown-cart-total'>
+                            <span>Tổng tiền:</span>
+                            <span>{formatter.format(cart.total_price)}</span>
+                        </div>
+                    )
+                }
+                {
+                   cart && cart.total_price > 0 &&
                     <div
 
                         onClick={() => {

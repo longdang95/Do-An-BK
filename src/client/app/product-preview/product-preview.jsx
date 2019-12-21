@@ -94,7 +94,7 @@ export class ProductPreview extends React.Component {
                 {...this.props}
             >
                 <div className='product-preview'>
-                    <div className="row">
+                    <div className="row no-margin">
                         {product && (
                             <Fragment>
                                 <div className='col-lg-4 preview-left'>
@@ -183,9 +183,9 @@ export class ProductPreview extends React.Component {
                     {
                         product && (
                             <div
-                                className="row description-wrap">
+                                className="row description-wrap no-margin">
                                 <div
-                                    className='col-lg-9 des-preview'
+                                    className='col-lg-9 des-preview no-padding'
                                     dangerouslySetInnerHTML={{__html: product.description}}
                                 />
                                 <div className="col-lg-3 no-padding">
@@ -197,7 +197,7 @@ export class ProductPreview extends React.Component {
                         )
                     }
 
-                    <div className="row same-price">
+                    <div className="row same-price no-margin">
                         <FeaturedProducts
                             products={this.state.samePrice || []}
                             label='Sảm Phẩm Cùng Tầm Giá'

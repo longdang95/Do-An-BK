@@ -126,21 +126,27 @@ export class InfoBoxes extends React.Component {
             <div className='info-boxes'>
                 <div className="main-container flex-row">
                     <div className="info-box">
-                        <i className="fas fa-shipping-fast"></i>
+                        <div className='icon-sec'>
+                            <i className="fas fa-shipping-fast"></i>
+                        </div>
                         <div className="info-box-content">
                             <h4>MIỄN PHÍ VẬN CHUYỂN</h4>
                             <p>Miễn phí vận chuyển cho tất cả đơn hàng trị giá hơn 500,000</p>
                         </div>
                     </div>
                     <div className="info-box">
-                        <i className="fas fa-dollar-sign"></i>
+                        <div className='icon-sec2'>
+                            <i className="fas fa-dollar-sign"></i>
+                        </div>
                         <div className="info-box-content">
                             <h4>HOÀN TIỀN 100%</h4>
                             <p>Nếu xảy ra bất kì lỗi của nhà sản xuất trong 1 tuần đầu tiên sử dụng sản phẩm.</p>
                         </div>
                     </div>
                     <div className="info-box">
-                        <i className="fas fa-hourglass-start"></i>
+                        <div className='icon-sec' >
+                            <i className="fas fa-hourglass-start"></i>
+                        </div>
                         <div className="info-box-content">
                             <h4>HOTLINE 24/7</h4>
                             <p>Liên hệ hotline của chúng tôi bất khi nào quý khách cần sự trợ giúp.</p>

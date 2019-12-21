@@ -1,9 +1,26 @@
 .ads-item{
   margin-top 30px;
+
   .main-container{
     .images-left, .images-right{
       flex 0 0 25%;
 
+    }
+    @media (max-width 480px){
+      .images-center , .images-right{
+        display none !important;
+      }
+      .images-left{
+        width 100% !important;
+        flex  0 0 100% !important;
+        .banner-image{
+          width inherit !important;
+          img{
+            padding: 20px;
+            width: 100% ;
+          }
+        }
+      }
     }
     .images-center{
       flex 0 0 50%;
