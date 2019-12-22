@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import {AppFooter} from "../app-layout/app-footer/app-footer";
 import {Icon, Menu} from "antd";
 import {LeftSideMenuBar} from "./left-side-menu-bar";
+import {menus} from "./commons";
 export class AdminLayout extends React.Component {
     constructor(props) {
         super(props);
@@ -25,7 +26,17 @@ export class AdminLayout extends React.Component {
                         </Link>
                     </div>
                 </div>
-
+                <div className='menu-mobile flex-row main-container'>
+                    {
+                        menus.map((o,i)=>(
+                            <div className='menu-item' key={i}>
+                                <Link to={o.to}>
+                                    {o.label}
+                                </Link>
+                            </div>
+                        ))
+                    }
+                </div>
                 <div className="main-container main-center">
                     {showSideBar && <LeftSideMenuBar/> }
                     {this.props.children}

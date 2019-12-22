@@ -12,6 +12,8 @@ import {paymentApi} from "../../api/payment/payment-api";
 import {SearchDevice} from "../compare-divices/search-device/search-device";
 import {productApi} from "../../api/product/product-api";
 import {setTitle} from "../commond";
+import {menus} from "../component/admin-layout/commons";
+import {Link} from "react-router-dom";
 
 export class Dashboard extends React.Component {
     constructor(props) {

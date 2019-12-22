@@ -1,6 +1,7 @@
 import React from "react";
 import {Menu} from "antd";
 import {Link} from "react-router-dom";
+import {menus} from "./commons";
 
 
 export class LeftSideMenuBar extends React.Component {
@@ -10,44 +11,6 @@ export class LeftSideMenuBar extends React.Component {
     }
 
     render() {
-        let menus = [
-            {
-                to: '/dashboard',
-                label: 'Dashboard'
-            },
-            {
-                to: '/add-product',
-                label: 'Thêm sản phẩm mới'
-            },
-            {
-                to: '/products',
-                label: 'Quản lý sản phẩm'
-            },
-            {
-                to: '/trials',
-                label: 'Danh Sách Dùng Thử'
-            },
-            {
-                to: '/payments',
-                label: 'Hóa Đơn'
-            },
-            {
-                to: '/warehousing',
-                label: 'Nhập Kho'
-            },
-            {
-                to: '/manage-warehousing',
-                label : 'Quản lý kho'
-            },
-            {
-                to: '/update-banners',
-                label: 'Update ảnh bìa'
-            },
-            {
-                to: '/edit-banners',
-                label: 'Quản lý ảnh bìa'
-            },
-        ]
         return (
             <div className='left-side-menu-bar'>
                 <Menu

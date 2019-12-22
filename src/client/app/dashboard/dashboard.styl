@@ -1,7 +1,18 @@
 .dashboard{
   background #FFFFFF;
+  .menu-mobile{
+    display none;
+  }
   @media (max-width 480px){
     width 100%;
+    .menu-mobile{
+      display block;
+      flex-wrap wrap;
+      .menu-item{
+        width: 50%;
+        display: inline-block;
+      }
+    }
     .sum-header{
       flex-direction column !important;
       .head-card{

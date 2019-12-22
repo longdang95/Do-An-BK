@@ -77,7 +77,7 @@ export class AppHeader extends React.Component {
                             />
 
                             <div className='phone flex-row'>
-                                <div><i className="fas fa-phone"></i></div>
+                                <div className='sec'><i className="fas fa-phone"></i></div>
                                 <div className='info'>
                                     <span>Hotline</span>
                                     <br/>
