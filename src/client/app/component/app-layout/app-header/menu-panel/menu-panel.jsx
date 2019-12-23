@@ -55,15 +55,15 @@ export class MenuPanel extends React.Component {
 
 
                     {!user &&
-                        <div className="header-right">
-                            menuRights.map((o,i)=> (
+                    <div className="header-right">
+                        {menuRights.map((o, i) => (
                             <a key={i} className='none-underline' href={o.link || '#'}>
                                 <div className='menu-item'>
                                     {o.label}
                                 </div>
                             </a>
-                            ))
-                        </div>
+                        ))}
+                    </div>
                     }
                 </div>
             </div>
