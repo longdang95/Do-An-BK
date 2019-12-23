@@ -129,9 +129,9 @@ export class ProductPreview extends React.Component {
                                         rate={40}
                                         onClick={(value)=>{}}/>
                                     <DiscountInfo/>
-                                    <CartAction
-                                        product={product}
-                                    />
+                                    {/*<CartAction*/}
+                                    {/*    product={product}*/}
+                                    {/*/>*/}
                                     <button
                                         className='dungthu-btn'
                                         onClick={() => {
@@ -160,12 +160,23 @@ export class ProductPreview extends React.Component {
                                     </button>
 
                                     <button
-                                        disabled={!cart || !cart.products.length >=1}
                                         onClick={()=>{
-                                            this.props.history.push('/checkout')
+                                            if(!product.status){
+                                                alert('Sản phẩm này đang tạm dừng bán !')
+                                                return ;
+                                            }
+                                            let cart =  cartState.getState();
+
+                                            cartApi.submitCart( cart ? cart._id : null , product._id ,  1).then(data =>{
+                                                if(!cart){
+                                                    localStorage.setItem('cartId',data._id);
+                                                }
+                                                console.log(data)
+                                                cartState.setState(data);
+                                            })
                                         }}
                                         className='thanhtoan-btn'>
-                                        Thanh Toán
+                                        Add To Cart
                                     </button>
                                 </div>
 

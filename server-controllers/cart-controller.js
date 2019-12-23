@@ -60,7 +60,7 @@ module.exports = (app) => {
     })
 
 
-    app.post('/cart', security.authorDetails ,  async (req, res) => {
+    app.post('/cart', security.checkUser ,  async (req, res) => {
         let {cartId, productId, quantity} = req.body;
         let cart = await checkCart(cartId);
         let prd = await findProductById(productId);

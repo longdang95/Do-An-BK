@@ -55,6 +55,18 @@ module.exports = {
             }
         )
     },
+    checkUser : (req, res, next) => {
+        decode(req).then((decodedAuth) => {
+                UserDao.findOne({_id: decodedAuth._id}, {"password": 0}, (err, user) => {
+                    req.user = user;
+                    next();
+                })
+            } ,()=>{
+                req.user = null ;
+                next();
+            }
+        )
+    },
     isAdmin: (req, res, next) => {
         decode(req).then((decodedAuth) => {
                 UserDao.findOne({_id: decodedAuth._id}, {"password": 0}, (err, user) => {
