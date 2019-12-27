@@ -6,4 +6,3 @@ yarn-error.log*
 dist/assets/js/bundle.js
 dist/assets/css/style.css
 dist/uploads
-/build
