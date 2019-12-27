@@ -6,7 +6,8 @@
   "scripts": {
     "start": "forever start build/server.js",
     "stop": "forever stop build/server.js",
-    "wp": "webpack --watch"
+    "wp": "webpack --watch",
+    "gen-admin" : "forever start -c mongoimport --db do-an --collection user --file gen-admin.json"
   },
   "author": "",
   "license": "MIT",
