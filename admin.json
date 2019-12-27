@@ -1,1 +1,1 @@
-{ "_id" : ObjectId("5b6ab29389690e0689180e76"), "username" : “wind”, "isAdmin" : true, "password" : "ab8189554f2e8f902e39b4c2505f4df0", "created" : ISODate("2018-10-10T09:06:27.175Z"), "__v" : 0 }
+{"username" : “wind”, "isAdmin" : true, "password" : "ab8189554f2e8f902e39b4c2505f4df0", "created" : ISODate("2019-12-10T09:06:27.175Z"), "__v" : 0 }
