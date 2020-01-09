@@ -1,5 +1,5 @@
 
 
 module.exports={
-    host : '207.148.77.141'
+    host : 'http://207.148.77.141'
 }
