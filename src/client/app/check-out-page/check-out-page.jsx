@@ -70,7 +70,6 @@ export class CheckoutPage extends React.Component {
     }
     render() {
         let cart = cartState.getState();
-        console.log(this.state);
         const {payment_type} =this.state;
         return (
             <ManageLayout
@@ -194,7 +193,11 @@ export class CheckoutPage extends React.Component {
                                     if(payment_type == 1){
                                         paymentTypeApi.momoPayment(draft).then(data =>{
                                             console.log(data);
-                                            window.location.href = data.payUrl;
+                                            if(data.errorCode !=0){
+                                                alert(data.message);
+                                            }else{
+                                                window.location.href = data.payUrl;
+                                            }
                                         })
                                     }else if(payment_type == 2){
                                         paymentTypeApi.stripePayment(draft ).then(data => {

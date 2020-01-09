@@ -13,6 +13,7 @@ const checkCart = (cartId) => new Promise((res, rej) => {
         res(null)
     })
 })
+
 const handleCheckoutSession = (session) => {
 
     PaymentDao.findOneAndUpdate({sessionId: session.id, status: 1}, {status: 2}, {new: false}, (err, rs) => {
@@ -49,7 +50,7 @@ let runcompleted = async ()=>{
 
 }
 
-module.exports = (app) => {
+module.exports = (app , host) => {
 
     runcompleted()
 
@@ -68,7 +69,7 @@ module.exports = (app) => {
 
     // xử lý thanh toán qua Momo
 
-    app.post('/momo/payment', Security.authorDetails , async (req, res) => {
+    app.post('/momo/payment' , Security.checkUser , async (req, res) => {
         const {cartId} = req.body;
         const cart = await checkCart(cartId);
         if (cart) {
@@ -77,10 +78,10 @@ module.exports = (app) => {
             var serectkey = "3X1aU7sxGTTQTeE4eknB9kaymeQIKYSs"
             var orderInfo = "Đồ án thanh toán qua MoMo"
             var amount = "" + cart.total_price;
-            var notifyurl = "http://localhost:5001/api/"
+            var notifyurl = host +"/api/"
             var orderId = cart._id;
             var requestId = "DOAN" + new Date().getTime() + 'BK';
-            var returnUrl = "http://localhost:5001/payment-detail/" + requestId;
+            var returnUrl = host + "/payment-detail/" + requestId;
             var requestType = "captureMoMoWallet"
             var extraData = ""
             var rawSignature = "partnerCode=" + partnerCode + "&accessKey=" + accessKey + "&requestId=" + requestId + "&amount=" + amount + "&orderId=" + orderId + "&orderInfo=" + orderInfo + "&returnUrl=" + returnUrl + "&notifyUrl=" + notifyurl + "&extraData=" + extraData
@@ -112,9 +113,10 @@ module.exports = (app) => {
             rp(ops).then(function (parsedBody) {
                 // POST succeeded...
                 if(parsedBody){
-                    PaymentDao.create({...req.body , status: 2, sessionId : parsedBody.requestId , userId : req.user._id || null  },(err, rs)=>{
+                    PaymentDao.create({...req.body , status: 2, sessionId : parsedBody.requestId , userId : req.user ? req.user._id : null  },(err, rs)=>{
                         console.log(rs);
                         CartDao.findOneAndUpdate({_id: cart._id}, {active: false}, {new: true}, (err, rm) => {
+                            console.log('hhh')
                             return res.send(parsedBody)
                         })
                     })
@@ -122,6 +124,7 @@ module.exports = (app) => {
             })
                 .catch(function (err) {
                     // POST failed...
+                    console.log(err)
                     return res.send({})
                 });
 
@@ -133,7 +136,7 @@ module.exports = (app) => {
 
 
     // xử lý thanh toán qua thẻ Visa ( sử dụng dịch vụ của Stripe )
-    app.post('/stripe/payment', async (req, res) => {
+    app.post('/stripe/payment', Security.checkUser , async (req, res) => {
         const {cartId} = req.body;
         const cart = await checkCart(cartId);
 
@@ -142,7 +145,7 @@ module.exports = (app) => {
                 return {
                     name: o.name,
                     description: 'My Description',
-                    images: [`http://localhost:5001/${o.images[0].filePath}`],
+                    images: [`${host}/${o.images[0].filePath}`],
                     amount: o.price,
                     currency: 'vnd',
                     quantity: o.quantity,
@@ -152,8 +155,8 @@ module.exports = (app) => {
                 const session = await stripe.checkout.sessions.create({
                     payment_method_types: ['card'],
                     line_items: lineItems,
-                    success_url: 'http://localhost:5001/payment-detail/{CHECKOUT_SESSION_ID}',
-                    cancel_url: 'http://localhost:5001/manage/payments?session_id={CHECKOUT_SESSION_ID}',
+                    success_url: host + '/payment-detail/{CHECKOUT_SESSION_ID}',
+                    cancel_url: host + '/manage/payments?session_id={CHECKOUT_SESSION_ID}',
                 });
                 if (session) {
                     PaymentDao.create({

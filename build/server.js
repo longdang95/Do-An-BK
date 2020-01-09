@@ -18,6 +18,11 @@ const storage = multer.diskStorage({
         cb(null, ran + file.originalname);
     }
 })
+try{
+    var {host = null } = require('./config') ;
+}catch(e){
+    var host = "http://localhost:5001" ;
+}
 const upload = multer({storage: storage})
 var mongoose = require('mongoose');
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/do-an", {useNewUrlParser: true});
@@ -36,7 +41,7 @@ require("../server-controllers/user-controller")(router)
 require("../server-controllers/product-controller")(router)
 require("../server-controllers/cart-controller")(router)
 require("../server-controllers/trial-register-controllers")(router)
-require("../server-controllers/payment-controller")(router)
+require("../server-controllers/payment-controller")(router , host )
 require("../server-controllers/chart-controller")(router)
 require("../server-controllers/inventory-controller")(router)
 require("../server-controllers/view-controller")(router)
